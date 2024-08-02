@@ -32,7 +32,7 @@ public class ExperianceController {
 	@GetMapping("/{userId}/experiance")
 	public ResponseEntity<?> getExperianceDetails(@PathVariable Long userId){
 		
-		return ResponseEntity.ok(service.getExperiance()); 
+		return ResponseEntity.ok(service.getExperiance(userId)); 
 	}
 
 }

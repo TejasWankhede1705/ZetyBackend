@@ -1,47 +1,31 @@
 package com.app.dto;
 
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import com.app.custum_exception.RersourseNotFoundException;
-import com.app.dao.BesicDetailsDao;
-import com.app.entity.BesicDetails;
+import javax.validation.constraints.Email;
 
-@Repository
-@Transactional
-public class BesicDetailsDto implements BesicDetailsDao{
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-	@Autowired
-    private SessionFactory sessionFactory;
-	boolean flag;
+@NoArgsConstructor
+@Getter
+@Setter
+public class BesicDetailsDto {
 
-    @Override
-    public boolean addBasicDetails(BesicDetails basicDetails) {
-    	try {
-            System.out.println("Adding BasicDetails: " + basicDetails);
-            Session session = sessionFactory.getCurrentSession();
-            session.save(basicDetails);
-            flag=true;
-    	}
-    	catch(RersourseNotFoundException e) {
-    		e.printStackTrace();
-    		flag=false;
-    	}
-        return flag;
-    }
+	private String firstName;
 
-   
+	private String lastName;
 
-    @Override
-    public List<BesicDetails> getAllBasicDetails() {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from BesicDetails", BesicDetails.class).list();
-    }
-    @Override
-    public BesicDetails getBasicDetailsById(Long id) {
-        return sessionFactory.getCurrentSession().get(BesicDetails.class, id);
-    }
+	private String email;
+
+	private String phone;
+
+	private String Profession;
+
+	private String city;
+
+	private String country;
+
+	private String linkdin;
+
+	private String github;
 }

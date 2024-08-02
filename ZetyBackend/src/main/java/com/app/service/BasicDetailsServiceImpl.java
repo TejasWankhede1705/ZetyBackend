@@ -1,14 +1,18 @@
 package com.app.service;
 
 import java.util.List;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custum_exception.RersourseNotFoundException;
 import com.app.dao.BesicDetailsDao;
+import com.app.dto.ApiResponse;
 import com.app.dto.BesicDetailsDto;
 import com.app.entity.BesicDetails;
-import com.app.service.BasicDetailsService;
+
 
 @Service
 @Transactional
@@ -16,36 +20,29 @@ public class BasicDetailsServiceImpl implements BasicDetailsService {
 
     @Autowired
     private BesicDetailsDao dao;
+    
+    @Autowired
+    private ModelMapper mapper;
 
-    @Override
-    public boolean addBasicDetails(BesicDetails basicDetails) {
-        return dao.addBasicDetails(basicDetails);
-    }
+   
 
-    @Override
-    public List<BesicDetails> getAllBasicDetails() {
-        return dao.getAllBasicDetails();
-    }
+   
+ 
 
-    @Override
-    public BesicDetails getBasicDetailsById(Long id) {
-        BesicDetails basicDetails = dao.getBasicDetailsById(id);
-        return convertToDTO(basicDetails);
-    }
+	@Override
+	public ApiResponse addExperiance(BesicDetailsDto details) {
+		BesicDetails b = mapper.map(details, BesicDetails.class);
+		dao.save(b);
+		return new ApiResponse("Besic details added sucsessfully");
+	}
 
-    // Method to convert BesicDetails to BesicDetailsDTO
-    private BesicDetails convertToDTO(BesicDetails besicDetails) {
-        return new BesicDetails(
-                besicDetails.getId(),
-                besicDetails.getFirstName(),
-                besicDetails.getLastName(),
-                besicDetails.getEmail(),
-                besicDetails.getProfession(),
-                besicDetails.getCity(),
-                besicDetails.getCountry(),
-                besicDetails.getLinkdin(),
-                besicDetails.getGithub(),
-                besicDetails.getPhone()
-        );
-    }
+
+
+	@Override
+	public BesicDetailsDto getBasicDetailsById(Long id) {
+		// TODO Auto-generated method stub
+		BesicDetails b = dao.findById(id).orElseThrow(()-> new RersourseNotFoundException("unable to find the user"));
+		
+		return mapper.map(b, BesicDetailsDto.class);
+	}
 }

@@ -29,7 +29,7 @@ public class Education extends BaseEntity{
 	@Column(name = "schooll_ocation")
 	private String SchoolLocation;
 	
-	@Column(name = "filed_of_study")
+	@Column(name = "field_of_study")
 	private String FieldOfStudy;
 	
 	@Column(name = "graduation_Year")

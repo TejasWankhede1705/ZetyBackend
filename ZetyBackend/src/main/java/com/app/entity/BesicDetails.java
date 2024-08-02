@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -49,7 +50,7 @@ public class BesicDetails extends BaseEntity {
 	@Column(name = "github")
 	private String github;
 
-	@OneToMany(mappedBy = "detailsEducation", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "detailsEducation", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Education> education = new ArrayList<>();
 
 	@OneToMany(mappedBy = "detailsExperiance", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -69,7 +70,7 @@ public class BesicDetails extends BaseEntity {
 		e.setDetailsEducation(null);
 	}
 
-	// helper method for experiance
+	// helper method for experiance 
 	public void addExperance(Experiance e) {
 		experiance.add(e);
 		e.setDetailsExperiance(this);
@@ -89,6 +90,8 @@ public class BesicDetails extends BaseEntity {
 		skills.remove(s);
 		s.setDetailsSkill(null);
 	}
+	
+	
 
 	public BesicDetails(Long id,String firstName, String lastName, @Email String email, String phone, String profession,
 			String city, String country, String linkdin, String github) {
@@ -105,105 +108,7 @@ public class BesicDetails extends BaseEntity {
 		this.github = github;
 	}
 	
-	public Long getId(Long id) {
-		return id;
-	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getProfession() {
-		return Profession;
-	}
-
-	public void setProfession(String profession) {
-		Profession = profession;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getLinkdin() {
-		return linkdin;
-	}
-
-	public void setLinkdin(String linkdin) {
-		this.linkdin = linkdin;
-	}
-
-	public String getGithub() {
-		return github;
-	}
-
-	public void setGithub(String github) {
-		this.github = github;
-	}
-
-	public List<Education> getEducation() {
-		return education;
-	}
-
-	public void setEducation(List<Education> education) {
-		this.education = education;
-	}
-
-	public List<Experiance> getExperiance() {
-		return experiance;
-	}
-
-	public void setExperiance(List<Experiance> experiance) {
-		this.experiance = experiance;
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
 
 	@Override
 	public String toString() {
