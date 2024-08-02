@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 import com.app.custum_exception.RersourseNotFoundException;
 import com.app.dao.BesicDetailsDao;
 import com.app.dao.SkillDao;
@@ -14,7 +13,7 @@ import com.app.dto.ApiResponse;
 import com.app.dto.SkillDto;
 import com.app.entity.BesicDetails;
 import com.app.entity.Skill;
-import com.app.entity.SkillType;
+
 
 @Service
 @Transactional
