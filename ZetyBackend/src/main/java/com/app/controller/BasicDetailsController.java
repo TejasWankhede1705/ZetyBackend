@@ -21,10 +21,10 @@ public class BasicDetailsController {
     @Autowired
     private BasicDetailsService service;
 
-    @PostMapping("/basicdetails")
+    @PostMapping("basicdetails")
     public ResponseEntity<?> addUsersBasicDetails(@RequestBody BesicDetailsDto details) {
       
-    	return ResponseEntity.status(HttpStatus.CREATED).body(service.addExperiance(details));
+    	return ResponseEntity.status(HttpStatus.CREATED).body(service.addBasicDetails(details));
     }
     
     @GetMapping("/{userId}/getBasicdetails")

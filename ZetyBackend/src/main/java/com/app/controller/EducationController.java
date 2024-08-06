@@ -16,7 +16,6 @@ import com.app.dto.EducationDto;
 import com.app.entity.Education;
 
 import com.app.service.EducationSerivce;
-import com.app.service.EducationServiceImlp;
 
 @RestController
 @RequestMapping("/user")

@@ -1,12 +1,14 @@
 package com.app.entity;
 
 import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,10 +20,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name="education")
-@Getter
-@Setter
-@NoArgsConstructor
 public class Education extends BaseEntity{
+	
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 private Long id;
 
 	@Column(name = "school_name")
 	private String SchoolName;
@@ -40,21 +43,102 @@ public class Education extends BaseEntity{
 	private Degree degree;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",nullable=false)
 	private BesicDetails detailsEducation;
 
+	
+	public Education() {}
 
-	public Education(String schoolName, String schoolLocation, String fieldOfStudy, String graduationYear,
-			Degree degree) {
-		super();
+
+	public Education( String schoolName, String schoolLocation, String fieldOfStudy, String graduationYear,
+			Degree degree, BesicDetails detailsEducation) {
 		SchoolName = schoolName;
 		SchoolLocation = schoolLocation;
 		FieldOfStudy = fieldOfStudy;
 		this.graduationYear = graduationYear;
 		this.degree = degree;
+		this.detailsEducation = detailsEducation;
 	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getSchoolName() {
+		return SchoolName;
+	}
+
+
+	public void setSchoolName(String schoolName) {
+		SchoolName = schoolName;
+	}
+
+
+	public String getSchoolLocation() {
+		return SchoolLocation;
+	}
+
+
+	public void setSchoolLocation(String schoolLocation) {
+		SchoolLocation = schoolLocation;
+	}
+
+
+	public String getFieldOfStudy() {
+		return FieldOfStudy;
+	}
+
+
+	public void setFieldOfStudy(String fieldOfStudy) {
+		FieldOfStudy = fieldOfStudy;
+	}
+
+
+	public String getGraduationYear() {
+		return graduationYear;
+	}
+
+
+	public void setGraduationYear(String graduationYear) {
+		this.graduationYear = graduationYear;
+	}
+
+
+	public Degree getDegree() {
+		return degree;
+	}
+
+
+	public void setDegree(Degree degree) {
+		this.degree = degree;
+	}
+
+
+	public BesicDetails getDetailsEducation() {
+		return detailsEducation;
+	}
+
+
+	public void setDetailsEducation(BesicDetails detailsEducation) {
+		this.detailsEducation = detailsEducation;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Education [id=" + id + ", SchoolName=" + SchoolName + ", SchoolLocation=" + SchoolLocation
+				+ ", FieldOfStudy=" + FieldOfStudy + ", graduationYear=" + graduationYear + ", degree=" + degree
+				+ ", detailsEducation=" + detailsEducation + "]";
+	}
+
 	
-	
-	
+
 }

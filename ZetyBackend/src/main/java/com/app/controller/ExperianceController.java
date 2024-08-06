@@ -22,7 +22,7 @@ public class ExperianceController {
 	
 	
 	
-	@PostMapping("/experiance")
+	@PostMapping("experiance")
 	public ResponseEntity<?> addExperianceDetails(@RequestBody ExperianceDto dto){
 		
 		System.out.println("inexperiance controller");

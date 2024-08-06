@@ -46,13 +46,8 @@ public class Skill extends BaseEntity {
 	}
 
 
-	public void setDetailsSkill(BesicDetails detailsSkill) {
-        this.detailsSkill = detailsSkill;
-    }
-
 	
-
-    public List<String> getSkills() {
+	public List<String> getSkills() {
 		return skills;
 	}
 
@@ -74,6 +69,11 @@ public class Skill extends BaseEntity {
 
 	public BesicDetails getDetailsSkill() {
 		return detailsSkill;
+	}
+
+
+	public void setDetailsSkill(BesicDetails detailsSkill) {
+		this.detailsSkill = detailsSkill;
 	}
 
 

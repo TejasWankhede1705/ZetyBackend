@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 public class SkillDto {
+	
 	 private List<String> skills;
 	 private SkillType skillType;
 	 private Long userId;
