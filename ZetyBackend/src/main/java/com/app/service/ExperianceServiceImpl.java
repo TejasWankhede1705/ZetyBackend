@@ -57,4 +57,17 @@ public class ExperianceServiceImpl implements ExperianceService {
 		experiancedao.save(existingExperience);
 		return new ApiResponse("experience details updated successfully");
 	}
+
+	@Override
+	public ApiResponse deleteExperiance(Long id) {
+		Experiance e = experiancedao.findById(id).orElseThrow(()->new RersourseNotFoundException("experiance cannot be found"));
+		
+		BesicDetails b = besicDetailsdao.findById(e.getDetailsExperiance().getId()).orElseThrow(()->new RersourseNotFoundException("user cannot be found"));
+		
+		experiancedao.delete(e);
+		
+		b.removeExperiance(e);
+		
+		return new ApiResponse("experiance details removed");
+	}
 }

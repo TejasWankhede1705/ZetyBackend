@@ -5,7 +5,11 @@ import com.app.dto.BesicDetailsDto;
 import com.app.entity.BesicDetails;
 
 public interface BasicDetailsService {
-    BesicDetailsDto getBasicDetailsById(Long id); 
-    ApiResponse addBasicDetails(BesicDetailsDto details); 
-    ApiResponse updateBasicDetails(Long id,BesicDetailsDto details);
+	BesicDetailsDto getBasicDetailsById(Long id);
+
+	ApiResponse addBasicDetails(BesicDetailsDto details);
+
+	ApiResponse updateBasicDetails(Long id, BesicDetailsDto details);
+
+	ApiResponse deleteBesicdetails(Long userId);
 }

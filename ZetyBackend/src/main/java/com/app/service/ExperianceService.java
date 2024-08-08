@@ -11,5 +11,6 @@ public interface ExperianceService {
 	ApiResponse addExperiance(ExperianceDto dto);
 	List<ExperianceDto> getExperiance(Long userId);
 	ApiResponse updateExperience(Long id,ExperianceDto dto);
+	ApiResponse deleteExperiance(Long id);
 
 }

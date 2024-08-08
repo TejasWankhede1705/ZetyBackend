@@ -43,4 +43,12 @@ public class BasicDetailsServiceImpl implements BasicDetailsService {
         dao.save(existingDetails);
 		return new ApiResponse("Basic details updated succesfully");
 	}
+
+	@Override
+	public ApiResponse deleteBesicdetails(Long userId) {
+		BesicDetails b = dao.findById(userId).orElseThrow(()->new RersourseNotFoundException("user cannot be found"));
+		
+		dao.delete(b);
+		return new ApiResponse("besic details have been deleted");
+	}
 }

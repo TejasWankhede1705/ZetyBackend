@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,11 @@ public class EducationController {
 	@PutMapping("/education/{id}")
 	public ResponseEntity<?> updateEducation(@PathVariable Long id, @RequestBody EducationDto dto) {
 	    return ResponseEntity.ok(educationService.updateEducation(id, dto));
+	}
+	@DeleteMapping("/deleteEducation/{educationId}")
+	public ResponseEntity<?>deleteEducationdetails(@PathVariable Long id){
+		
+		return ResponseEntity.ok(educationService.deleteEducation(id));
 	}
 
 }

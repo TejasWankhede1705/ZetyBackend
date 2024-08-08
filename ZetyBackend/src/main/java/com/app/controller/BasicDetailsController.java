@@ -3,6 +3,7 @@ package com.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +39,11 @@ public class BasicDetailsController {
     @PutMapping("/{userId}/basicdetails")
     public ResponseEntity<?> updateUserBasicDetails(@PathVariable Long userId, @RequestBody BesicDetailsDto details) {
         return ResponseEntity.ok(service.updateBasicDetails(userId, details));
-    }		
+    }	
+    
+    @DeleteMapping("/{userId}/deleteBesicDetals")
+    public ResponseEntity<?> deleteUserBesicDetails(@PathVariable Long userId){
+    	
+    	return ResponseEntity.ok(service.deleteBesicdetails(userId));
+    }
 }

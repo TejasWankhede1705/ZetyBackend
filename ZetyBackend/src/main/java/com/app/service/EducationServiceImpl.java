@@ -88,4 +88,18 @@ public class EducationServiceImpl implements EducationSerivce {
         return new ApiResponse("Education details updated successfully");
     }
 
+	@Override
+	public ApiResponse deleteEducation(Long id) {
+		Education e = educationDao.findById(id).orElseThrow(()-> new RersourseNotFoundException("Education details cannot be found"));
+		
+		BesicDetails b = besicDetailsDao.findById(e.getDetailsEducation().getId()).orElseThrow(()-> new RersourseNotFoundException("User cannot be found"));
+		
+		educationDao.delete(e);
+		
+		b.removeEducation(e);
+		
+		
+		return new ApiResponse("education details deleted sucsessfully !");
+	}
+
 }
