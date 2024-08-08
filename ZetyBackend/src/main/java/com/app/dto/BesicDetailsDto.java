@@ -1,7 +1,4 @@
 package com.app.dto;
-
-
-
 import java.util.List;
 
 import lombok.Getter;
@@ -13,15 +10,16 @@ import lombok.Setter;
 @Setter
 public class BesicDetailsDto {
 
-	  private String first_name;  // Change to match database
-	    private String last_name;   // Change to match database
+	  private String first_name;  
+	    private String last_name;  
 	    private String email;
 	    private String phone;
 	    private String profession;
 	    private String city;
 	    private String country;
-	    private String linkdin;     // Keep as is for now, but check consistency
+	    private String linkdin;    
 	    private String github;
+	    private String message;
 	   
 		public BesicDetailsDto() {}
 		
@@ -80,17 +78,19 @@ public class BesicDetailsDto {
 			this.github = github;
 		}
 
-		
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
 
 		@Override
 		public String toString() {
 			return "BesicDetailsDto [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
 					+ ", phone=" + phone + ", profession=" + profession + ", city=" + city + ", country=" + country
-					+ ", linkdin=" + linkdin + ", github=" + github +  "]";
+					+ ", linkdin=" + linkdin + ", github=" + github + ", message=" + message + "]";
 		}
 
-		
-		
-	    
-   
 }

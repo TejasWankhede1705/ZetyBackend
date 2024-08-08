@@ -1,5 +1,4 @@
 package com.app.service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
@@ -13,7 +12,6 @@ import com.app.dto.ApiResponse;
 import com.app.dto.SkillDto;
 import com.app.entity.BesicDetails;
 import com.app.entity.Skill;
-
 
 @Service
 @Transactional
@@ -30,7 +28,7 @@ public class SkillServiceImpl implements SkillService {
 
 	@Override
 	public ApiResponse addSkills(SkillDto dto) {
-	    Skill skills = new Skill(dto.getSkills(), dto.getSkillType()); 
+	    Skill skills = new Skill(dto.getSkills(), dto.getSkillType(), dto.getLanguages()); 
 	    BesicDetails details = basicDetailsDao.findById(dto.getUserId())
 	        .orElseThrow(() -> new RersourseNotFoundException("User not found"));
 
@@ -58,5 +56,18 @@ public class SkillServiceImpl implements SkillService {
 	        })
 	        .collect(Collectors.toList());
 	}
+
+		 @Override
+		    public ApiResponse updateSkills(Long skillId, SkillDto dto) {
+		        Skill skill = dao.findById(skillId)
+		            .orElseThrow(() -> new RersourseNotFoundException("Skill not found"));
+
+		        skill.setSkills(dto.getSkills());
+		        skill.setSkillType(dto.getSkillType());
+		        skill.setLanguages(dto.getLanguages());
+
+		        dao.save(skill); // Save the updated skill
+		        return new ApiResponse("Skills updated successfully");
+		    }
 
 }

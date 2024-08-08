@@ -34,4 +34,13 @@ public class BasicDetailsServiceImpl implements BasicDetailsService {
                 .orElseThrow(() -> new RersourseNotFoundException("Unable to find the user"));
         return mapper.map(b, BesicDetailsDto.class);
     }
+
+	@Override
+	public ApiResponse updateBasicDetails(Long id, BesicDetailsDto details) {
+        BesicDetails existingDetails = dao.findById(id)
+        		.orElseThrow(()-> new RersourseNotFoundException("unable to find the user"));
+        mapper.map(details, existingDetails);
+        dao.save(existingDetails);
+		return new ApiResponse("Basic details updated succesfully");
+	}
 }

@@ -35,4 +35,9 @@ public class SkillController {
 		return ResponseEntity.ok(skillService.getSkills(userId)); 
 	}
 
+    @PutMapping("updateSkills/{skillId}")
+    public ResponseEntity<?> updateSkillsDetails(@PathVariable Long skillId, @RequestBody SkillDto dto){
+        return ResponseEntity.ok(skillService.updateSkills(skillId, dto));
+    }
+
 }

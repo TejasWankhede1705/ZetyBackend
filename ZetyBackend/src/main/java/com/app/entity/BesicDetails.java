@@ -46,6 +46,9 @@ public class BesicDetails extends BaseEntity {
 
 	@Column(name = "github")
 	private String github;
+	
+	@Column(name="message")
+	private String message;
 
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "detailsEducation", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Education> education = new ArrayList<>();
@@ -88,16 +91,11 @@ public class BesicDetails extends BaseEntity {
 		s.setDetailsSkill(null);
 	}
 	
-	
-
 	public BesicDetails() {}
-
 	
-
 	public BesicDetails(String first_name, String last_name, @Email String email, String phone, String profession,
-			String city, String country, String linkdin, String github, List<Education> education,
+			String city, String country, String linkdin, String github, String message, List<Education> education,
 			List<Experiance> experiance, List<Skill> skills) {
-		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
@@ -107,13 +105,12 @@ public class BesicDetails extends BaseEntity {
 		this.country = country;
 		this.linkdin = linkdin;
 		this.github = github;
+		this.message = message;
 		this.education = education;
 		this.experiance = experiance;
 		this.skills = skills;
 	}
 
-	
-	
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -210,14 +207,20 @@ public class BesicDetails extends BaseEntity {
 		this.skills = skills;
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	@Override
 	public String toString() {
 		return "BesicDetails [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", phone="
 				+ phone + ", Profession=" + Profession + ", city=" + city + ", country=" + country + ", linkdin="
-				+ linkdin + ", github=" + github + ", education=" + education + ", experiance=" + experiance
-				+ ", skills=" + skills + "]";
+				+ linkdin + ", github=" + github + ", message=" + message + ", education=" + education + ", experiance="
+				+ experiance + ", skills=" + skills + "]";
 	}
-
-	
 
 }

@@ -20,7 +20,6 @@ import lombok.Setter;
 @Table(name = "skills")
 public class Skill extends BaseEntity {
 
-
     @ElementCollection
     @CollectionTable(name = "skills_list", joinColumns = @JoinColumn(name = "skill_id"))
     @Column(name = "skill")
@@ -33,52 +32,56 @@ public class Skill extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private BesicDetails detailsSkill;
-
-    public Skill(List<String> skills, SkillType skillType) {
-        super();
-        this.skills = skills;
-        this.skillType = skillType;
-    }
     
+    private String languages;
 
-    public Skill() {
-		// TODO Auto-generated constructor stub
+    public Skill() {}
+    
+	public Skill(List<String> skills, SkillType skillType, String languages) {
+		super();
+		this.skills = skills;
+		this.skillType = skillType;
+		this.languages = languages;
 	}
 
-
-	
 	public List<String> getSkills() {
 		return skills;
 	}
-
-
+	
 	public void setSkills(List<String> skills) {
 		this.skills = skills;
 	}
-
 
 	public SkillType getSkillType() {
 		return skillType;
 	}
 
-
 	public void setSkillType(SkillType skillType) {
 		this.skillType = skillType;
 	}
-
 
 	public BesicDetails getDetailsSkill() {
 		return detailsSkill;
 	}
 
-
 	public void setDetailsSkill(BesicDetails detailsSkill) {
 		this.detailsSkill = detailsSkill;
 	}
 
+	public String getLanguages() {
+		return languages;
+	}
+
+
+	public void setLanguages(String languages) {
+		this.languages = languages;
+	}
+
 
 	@Override
-    public String toString() {
-        return "Skill [skills=" + skills + ", skillType=" + skillType + "]";
-    }
+	public String toString() {
+		return "Skill [skills=" + skills + ", skillType=" + skillType + ", detailsSkill=" + detailsSkill
+				+ ", languages=" + languages + "]";
+	}
+
 }

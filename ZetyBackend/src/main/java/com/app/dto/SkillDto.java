@@ -13,6 +13,9 @@ public class SkillDto {
 	 private List<String> skills;
 	 private SkillType skillType;
 	 private Long userId;
+	 private String languages;
+	 
+	 
 	public List<String> getSkills() {
 		return skills;
 	}
@@ -31,11 +34,17 @@ public class SkillDto {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
+	public String getLanguages() {
+		return languages;
+	}
+	public void setLanguages(String languages) {
+		this.languages = languages;
+	}
 	@Override
 	public String toString() {
-		return "SkillDto [skills=" + skills + ", skillType=" + skillType + ", userId=" + userId + "]";
+		return "SkillDto [skills=" + skills + ", skillType=" + skillType + ", userId=" + userId + ", languages="
+				+ languages + "]";
 	}
-	 
-	 
-
+	
 }
