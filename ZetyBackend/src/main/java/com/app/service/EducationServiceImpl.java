@@ -43,14 +43,15 @@ public class EducationServiceImpl implements EducationSerivce {
         }
         
         Education education = mapper.map(dto, Education.class);
-        logger.info("Mapped Education isGapTaken: {}", education.isGapTaken());
-        BesicDetails basicDetails = besicDetailsDao.findById(dto.getUserId())
+                BesicDetails basicDetails = besicDetailsDao.findById(dto.getUserId())
                 .orElseThrow(() -> new RersourseNotFoundException("User not found"));
-        education.setDetailsEducation(basicDetails);
-        educationDao.save(education);
+       
+                basicDetails.addEducation(education);
+                
+              //education.setDetailsEducation(basicDetails);
+                educationDao.save(education);
 
-        logger.info("Education details added successfully for user ID: {}", dto.getUserId());
-        return new ApiResponse("Education details added successfully");
+               return new ApiResponse("Education details added successfully");
     }
 
     @Override
@@ -63,7 +64,7 @@ public class EducationServiceImpl implements EducationSerivce {
         List<EducationDto> educationList = basicDetails.getEducation().stream()
                 .map(education -> {
                     EducationDto dto = mapper.map(education, EducationDto.class);
-                    dto.setUserId(basicDetails.getId()); // Set userId from BesicDetails
+                   // dto.setUserId(basicDetails.getId()); // Set userId from BesicDetails
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -78,7 +79,7 @@ public class EducationServiceImpl implements EducationSerivce {
         Education existingEducation = educationDao.findById(id)
             .orElseThrow(() -> new RersourseNotFoundException("Education not found for ID: " + id));
 
-        dto.setId(existingEducation.getId());
+       // dto.setId(existingEducation.getId());
         logger.info("Before update: {}", existingEducation.isGapTaken());
         mapper.map(dto, existingEducation);
         logger.info("After update: {}", existingEducation.isGapTaken());

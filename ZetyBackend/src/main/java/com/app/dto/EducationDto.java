@@ -6,7 +6,6 @@ import com.app.entity.Months;
 
 public class EducationDto {
 
-	private Long Id;
 	private String SchoolName;
 	private String SchoolLocation;
 	private String FieldOfStudy;
@@ -22,13 +21,7 @@ public class EducationDto {
 		super();
 	}
 
-	public Long getId() {
-		return Id;
-	}
 
-	public void setId(Long id) {
-		Id = id;
-	}
 
 	public String getSchoolName() {
 		return SchoolName;
@@ -111,13 +104,6 @@ public class EducationDto {
 		this.certification = certification;
 	}
 
-	@Override
-	public String toString() {
-		return "EducationDto [Id=" + Id + ", SchoolName=" + SchoolName + ", SchoolLocation=" + SchoolLocation
-				+ ", FieldOfStudy=" + FieldOfStudy + ", graduationYear=" + graduationYear + ", degree=" + degree
-				+ ", userId=" + userId + ", month=" + month + ", isGapTaken=" + isGapTaken + ", gapYear=" + gapYear
-				+ ", certification=" + certification + "]";
-	}
-
+	
 	
 }

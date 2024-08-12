@@ -42,9 +42,9 @@ public class EducationController {
 	    return ResponseEntity.ok(educationService.updateEducation(id, dto));
 	}
 	@DeleteMapping("/deleteEducation/{educationId}")
-	public ResponseEntity<?>deleteEducationdetails(@PathVariable Long id){
+	public ResponseEntity<?>deleteEducationdetails(@PathVariable Long educationId){
 		
-		return ResponseEntity.ok(educationService.deleteEducation(id));
+		return ResponseEntity.ok(educationService.deleteEducation(educationId));
 	}
 
 }

@@ -20,10 +20,7 @@ import javax.persistence.Table;
 @Table(name="education")
 public class Education extends BaseEntity{
 	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Long id;
-
+	 
 	@Column(name = "school_name")
 	private String SchoolName;
 
@@ -78,13 +75,7 @@ public class Education extends BaseEntity{
 	}
 
 
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 
 	public String getSchoolName() {
 		return SchoolName;
@@ -169,7 +160,7 @@ public class Education extends BaseEntity{
 
 	@Override
 	public String toString() {
-		return "Education [id=" + id + ", SchoolName=" + SchoolName + ", SchoolLocation=" + SchoolLocation
+		return "Education [ SchoolName=" + SchoolName + ", SchoolLocation=" + SchoolLocation
 				+ ", FieldOfStudy=" + FieldOfStudy + ", graduationYear=" + graduationYear + ", degree=" + degree
 				+ ", month=" + month + ", isGapTaken=" + isGapTaken + ", gapYear=" + gapYear + ", certification="
 				+ certification + ", detailsEducation=" + detailsEducation + "]";

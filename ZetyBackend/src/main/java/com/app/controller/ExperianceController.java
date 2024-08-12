@@ -43,9 +43,9 @@ public class ExperianceController {
 	}
 	
 	
-	@DeleteMapping("deleteExperiance/{experianceId}")
-	public ResponseEntity<?>deleteExperianceDetails(@PathVariable Long id){
-		return ResponseEntity.ok(service.deleteExperiance(id));
+	@DeleteMapping("/deleteExperiance/{experianceId}")
+	public ResponseEntity<?>deleteExperianceDetails(@PathVariable Long experianceId){
+		return ResponseEntity.ok(service.deleteExperiance(experianceId));
 	}
 
 }

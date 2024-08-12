@@ -29,21 +29,21 @@ public class SkillController {
 		
 	}
 	
-	@GetMapping("getSkills/{userId}")
+	@GetMapping("/getSkills/{userId}")
 	public ResponseEntity<?> getSkillsDetails(@PathVariable Long userId){
 		
 		return ResponseEntity.ok(skillService.getSkills(userId)); 
 	}
 
-    @PutMapping("updateSkills/{skillId}")
+    @PutMapping("/updateSkills/{skillId}")
     public ResponseEntity<?> updateSkillsDetails(@PathVariable Long skillId, @RequestBody SkillDto dto){
         return ResponseEntity.ok(skillService.updateSkills(skillId, dto));
     }
     
-    @DeleteMapping("deleteSkills/{skillId}")
-    public ResponseEntity<?>deleteSkillsDetails(@PathVariable Long id){
+    @DeleteMapping("/deleteSkills/{skillId}")
+    public ResponseEntity<?>deleteSkillsDetails(@PathVariable Long skillId){
     	
-    	return ResponseEntity.ok(skillService.deleteSkills(id));
+    	return ResponseEntity.ok(skillService.deleteSkills(skillId));
     }
 
 }

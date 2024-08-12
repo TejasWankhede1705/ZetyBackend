@@ -86,11 +86,6 @@ public class BesicDetailsDto {
 			this.message = message;
 		}
 
-		@Override
-		public String toString() {
-			return "BesicDetailsDto [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
-					+ ", phone=" + phone + ", profession=" + profession + ", city=" + city + ", country=" + country
-					+ ", linkdin=" + linkdin + ", github=" + github + ", message=" + message + "]";
-		}
+	
 
 }
