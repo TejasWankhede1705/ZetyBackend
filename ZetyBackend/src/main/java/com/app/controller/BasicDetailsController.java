@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.BesicDetailsDto;
-
+import com.app.dto.CombinedResponseDto;
 import com.app.service.BasicDetailsService;
 
 @RestController
@@ -22,6 +22,24 @@ public class BasicDetailsController {
 
     @Autowired
     private BasicDetailsService service;
+    
+    
+    //API For getting the combined service
+    
+    @GetMapping("/summery/{id}")
+    public ResponseEntity<?>getAllData(@PathVariable Long id){
+    	
+    	CombinedResponseDto responseDto = service.getCombinedData(id);
+    	
+    	if(responseDto == null) {
+    		return ResponseEntity.notFound().build();
+    	}
+    	
+    	return ResponseEntity.ok(responseDto);
+    }
+    
+    
+    
 
     @PostMapping("basicdetails")
     public ResponseEntity<?> addUsersBasicDetails(@RequestBody BesicDetailsDto details) {
