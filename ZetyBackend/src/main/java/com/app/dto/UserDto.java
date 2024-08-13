@@ -1,8 +1,8 @@
 package com.app.dto;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+//import javax.persistence.Column;
+//import javax.persistence.EnumType;
+//import javax.persistence.Enumerated;
 
 
 

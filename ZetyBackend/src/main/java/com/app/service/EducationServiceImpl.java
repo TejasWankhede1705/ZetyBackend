@@ -4,6 +4,9 @@ import com.app.dto.ApiResponse;
 import com.app.dto.EducationDto;
 import com.app.entity.BesicDetails;
 import com.app.entity.Education;
+
+import jakarta.transaction.Transactional;
+
 import com.app.dao.BesicDetailsDao;
 import com.app.dao.EducationDao;
 import com.app.custum_exception.RersourseNotFoundException;
@@ -13,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
