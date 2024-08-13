@@ -11,6 +11,7 @@ import com.app.dto.ExperianceDto;
 import com.app.dto.SkillDto;
 import com.app.service.SkillService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("users")
 public class SkillController {
