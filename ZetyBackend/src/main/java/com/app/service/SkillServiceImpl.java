@@ -43,10 +43,10 @@ public class SkillServiceImpl implements SkillService {
 		BesicDetails b = basicDetailsDao.findById(userId)
 				.orElseThrow(() -> new RersourseNotFoundException("User Not Found"));
 
-		List<Skill> skills = b.getSkills();
-		System.out.println("Fetched Skills: " + skills);
+//		List<Skill> skills = b.getSkills();
+//		System.out.println("Fetched Skills: " + skills);
 
-		return skills.stream().map(skill -> {
+		return b.getSkills().stream().map(skill -> {
 			SkillDto dto = mapper.map(skill, SkillDto.class);
 			dto.setSkills(skill.getSkills());
 			dto.setSkillType(skill.getSkillType());
