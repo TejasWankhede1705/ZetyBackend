@@ -17,6 +17,7 @@ import com.app.dto.EducationDto;
 import com.app.dto.ExperianceDto;
 import com.app.dto.ResponseEducationDto;
 import com.app.dto.ResponseExperianceDto;
+import com.app.dto.ResponseProjectDto;
 import com.app.dto.ResponseSkillsDto;
 import com.app.dto.SkillDto;
 import com.app.entity.BesicDetails;
@@ -82,12 +83,16 @@ public class BasicDetailsServiceImpl implements BasicDetailsService {
 		List<ResponseSkillsDto>skills = besicDetails.getSkills().stream().map(s->mapper.map(s, ResponseSkillsDto.class)).
 										collect(Collectors.toList());
 		
+		List<ResponseProjectDto>project = besicDetails.getProjects().stream().map(p->mapper.map(p, ResponseProjectDto.class)).
+										collect(Collectors.toList());
+		
 		BesicDetailsDto besicDetailsDto = mapper.map(besicDetails, BesicDetailsDto.class);
 		
 		
 		responseDto.setBesicDetails(besicDetailsDto);
 		responseDto.setEducationList(education);
 		responseDto.setExperianceList(experiance);
+		responseDto.setProjectList(project);
 		responseDto.setSkillList(skills);
 		
 		

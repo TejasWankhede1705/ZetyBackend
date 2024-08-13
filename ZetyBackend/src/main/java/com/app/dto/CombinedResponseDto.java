@@ -14,6 +14,8 @@ public class CombinedResponseDto {
 	private List<ResponseExperianceDto> experianceList;
 	
 	private List<ResponseSkillsDto> skillList;
+	
+	private List<ResponseProjectDto> projectList;
 
 	public BesicDetailsDto getBesicDetails() {
 		return besicDetails;
@@ -47,6 +49,15 @@ public class CombinedResponseDto {
 		this.skillList = skillList;
 	}
 
+	public List<ResponseProjectDto> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(List<ResponseProjectDto> projectList) {
+		this.projectList = projectList;
+	}
+	
+	
 	
 
 

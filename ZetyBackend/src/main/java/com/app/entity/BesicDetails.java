@@ -56,6 +56,12 @@ public class BesicDetails extends BaseEntity {
 
 	@OneToMany(mappedBy = "detailsSkill", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Skill> skills = new ArrayList<>();
+	
+
+	@OneToMany(mappedBy = "detailsProject", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Project> projects = new ArrayList<>();
+	
+
 
 	// helper methods
 	public void addEducation(Education e) {
@@ -88,12 +94,21 @@ public class BesicDetails extends BaseEntity {
 		skills.remove(s);
 		s.setDetailsSkill(null);
 	}
+	public void addProject(Project p) {
+		projects.add(p);
+		p.setDetailsProject(this);
+	}
+	public void removeProject(Project p) {
+		projects.remove(p);
+		p.setDetailsProject(null);
+	}
+
 	
 	public BesicDetails() {}
 	
 	public BesicDetails(String first_name, String last_name, @Email String email, String phone, String profession,
 			String city, String country, String linkdin, String github, String message, List<Education> education,
-			List<Experiance> experiance, List<Skill> skills) {
+			List<Experiance> experiance, List<Skill> skills,List<Project>projects) {
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
@@ -107,6 +122,7 @@ public class BesicDetails extends BaseEntity {
 		this.education = education;
 		this.experiance = experiance;
 		this.skills = skills;
+		this.projects = projects;
 	}
 
 	public String getFirst_name() {
@@ -212,13 +228,23 @@ public class BesicDetails extends BaseEntity {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
 
 	@Override
 	public String toString() {
 		return "BesicDetails [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", phone="
 				+ phone + ", Profession=" + Profession + ", city=" + city + ", country=" + country + ", linkdin="
 				+ linkdin + ", github=" + github + ", message=" + message + ", education=" + education + ", experiance="
-				+ experiance + ", skills=" + skills + "]";
+				+ experiance + ", skills=" + skills + ", projects=" + projects + "]";
 	}
+
 
 }

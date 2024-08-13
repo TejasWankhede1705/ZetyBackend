@@ -39,7 +39,7 @@ public class ExperianceServiceImpl implements ExperianceService {
     @Override
     public List<ExperianceDto> getExperiance(Long userId) {
         BesicDetails b = besicDetailsdao.findById(userId)
-                .orElseThrow(() -> new RersourseNotFoundException("Experience Not Found"));
+                .orElseThrow(() -> new RersourseNotFoundException("User Not Found"));
 
         return b.getExperiance().stream()
                 .map(exp -> {
