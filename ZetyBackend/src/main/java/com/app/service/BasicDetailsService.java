@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.dto.ApiResponse;
 import com.app.dto.BesicDetailsDto;
+import com.app.dto.CombinedResponseDto;
 import com.app.entity.BesicDetails;
 
 public interface BasicDetailsService {
@@ -12,4 +13,6 @@ public interface BasicDetailsService {
 	ApiResponse updateBasicDetails(Long id, BesicDetailsDto details);
 
 	ApiResponse deleteBesicdetails(Long userId);
+	
+	CombinedResponseDto getCombinedData(Long id);
 }

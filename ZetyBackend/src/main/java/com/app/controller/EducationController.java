@@ -46,5 +46,5 @@ public class EducationController {
 		
 		return ResponseEntity.ok(educationService.deleteEducation(educationId));
 	}
-
+	
 }
