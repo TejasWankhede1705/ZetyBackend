@@ -26,26 +26,26 @@ public class ExperianceController {
 	
 	
 	
-	@PostMapping("experiance")
+	@PostMapping("addExperiance")
 	public ResponseEntity<?> addExperianceDetails(@RequestBody ExperianceDto dto){
 		
 		System.out.println("inexperiance controller");
 		return  ResponseEntity.status(HttpStatus.CREATED).body(service.addExperiance(dto));
 	}
 	
-	@GetMapping("/{userId}/experiance")
+	@GetMapping("getExperiance/{userId}")
 	public ResponseEntity<?> getExperianceDetails(@PathVariable Long userId){
 		
 		return ResponseEntity.ok(service.getExperiance(userId)); 
 	}
 	
-	@PutMapping("/experiance/{id}")
+	@PutMapping("updateExperiance/{id}")
 	public ResponseEntity<?> updateExperianceDetails(@PathVariable Long id, @RequestBody ExperianceDto dto) {
 	    return ResponseEntity.ok(service.updateExperience(id, dto));
 	}
 	
 	
-	@DeleteMapping("/deleteExperiance/{experianceId}")
+	@DeleteMapping("deleteExperiance/{experianceId}")
 	public ResponseEntity<?>deleteExperianceDetails(@PathVariable Long experianceId){
 		return ResponseEntity.ok(service.deleteExperiance(experianceId));
 	}

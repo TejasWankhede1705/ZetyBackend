@@ -26,9 +26,33 @@ public class BasicDetailsController {
     private BasicDetailsService service;
     
     
+    @PostMapping("addBasicdetails")
+    public ResponseEntity<?> addUsersBasicDetails(@RequestBody BesicDetailsDto details) {
+      
+    	return ResponseEntity.status(HttpStatus.CREATED).body(service.addBasicDetails(details));
+    }
+    
+    @GetMapping("getBasicdetails/{userId}")
+    public ResponseEntity<?>getUserBasicDetails(@PathVariable Long userId){
+    	
+    	return ResponseEntity.ok(service.getBasicDetailsById(userId));
+    }
+    
+
+    @PutMapping("updateBasicdetails/{userId}")
+    public ResponseEntity<?> updateUserBasicDetails(@PathVariable Long userId, @RequestBody BesicDetailsDto details) {
+        return ResponseEntity.ok(service.updateBasicDetails(userId, details));
+    }	
+    
+    @DeleteMapping("deleteBasicDetals/{userId}")
+    public ResponseEntity<?> deleteUserBesicDetails(@PathVariable Long userId){
+    	
+    	return ResponseEntity.ok(service.deleteBesicdetails(userId));
+    }
+
     //API For getting the combined service
     
-    @GetMapping("/summery/{id}")
+    @GetMapping("getAllBasicDetails/{id}")
     public ResponseEntity<?>getAllData(@PathVariable Long id){
     	
     	CombinedResponseDto responseDto = service.getCombinedData(id);
@@ -38,32 +62,5 @@ public class BasicDetailsController {
     	}
     	
     	return ResponseEntity.ok(responseDto);
-    }
-    
-    
-    
-
-    @PostMapping("basicdetails")
-    public ResponseEntity<?> addUsersBasicDetails(@RequestBody BesicDetailsDto details) {
-      
-    	return ResponseEntity.status(HttpStatus.CREATED).body(service.addBasicDetails(details));
-    }
-    
-    @GetMapping("/{userId}/getBasicdetails")
-    public ResponseEntity<?>getUserBasicDetails(@PathVariable Long userId){
-    	
-    	return ResponseEntity.ok(service.getBasicDetailsById(userId));
-    }
-    
-
-    @PutMapping("/{userId}/basicdetails")
-    public ResponseEntity<?> updateUserBasicDetails(@PathVariable Long userId, @RequestBody BesicDetailsDto details) {
-        return ResponseEntity.ok(service.updateBasicDetails(userId, details));
-    }	
-    
-    @DeleteMapping("/{userId}/deleteBesicDetals")
-    public ResponseEntity<?> deleteUserBesicDetails(@PathVariable Long userId){
-    	
-    	return ResponseEntity.ok(service.deleteBesicdetails(userId));
     }
 }

@@ -25,13 +25,13 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 
-	@PostMapping("/addProject")
+	@PostMapping("addProject")
 	public ResponseEntity<?> addProjectDetails(@RequestBody ProjectDto dto) {
 
 		return ResponseEntity.ok(projectService.addProject(dto));
 	}
 
-	@GetMapping("/getProject/{userId}")
+	@GetMapping("getProject/{userId}")
 	public ResponseEntity<?> getProjectDetails(@PathVariable Long userId) {
 		
 		return ResponseEntity.ok(projectService.getProject(userId));
