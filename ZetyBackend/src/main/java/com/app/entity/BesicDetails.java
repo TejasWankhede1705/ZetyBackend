@@ -10,6 +10,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 
@@ -17,36 +20,52 @@ import jakarta.validation.constraints.Email;
 @Table(name = "besic_details")
 public class BesicDetails extends BaseEntity {
 
-	@Column(name = "first_name")
-	private String first_name;
+	@Column(name = "first_name", length = 100)
+    @NotEmpty(message = "First name cannot be empty")
+    @Size(max = 100, message = "First name cannot exceed 100 characters")
+    private String firstName;
 
-	@Column(name = "last_name")
-	private String last_name;
+    @Column(name = "last_name", length = 100)
+    @NotEmpty(message = "Last name cannot be empty")
+    @Size(max = 100, message = "Last name cannot exceed 100 characters")
+    private String lastName;
 
-	@Column(name = "email")
-	@Email
-	private String email;
+    @Column(name = "email", length = 100)
+    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Email cannot be empty")
+    private String email;
 
-	@Column(name = "phone", length = 10)
-	private String phone;
+    @Column(name = "phone", length = 10)
+    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+    @NotEmpty(message = "Phone number cannot be empty")
+    private String phone;
 
-	@Column(name = "profession")
-	private String Profession;
+    @Column(name = "profession", length = 100)
+    @NotEmpty(message = "Profession cannot be empty")
+    @Size(max = 100, message = "Profession cannot exceed 100 characters")
+    private String profession;
 
-	@Column(name = "city")
-	private String city;
+    @Column(name = "city", length = 100)
+    @NotEmpty(message = "City cannot be empty")
+    @Size(max = 100, message = "City cannot exceed 100 characters")
+    private String city;
 
-	@Column(name = "country")
-	private String country;
+    @Column(name = "country", length = 100)
+    @NotEmpty(message = "Country cannot be empty")
+    @Size(max = 100, message = "Country cannot exceed 100 characters")
+    private String country;
 
-	@Column(name = "linkdin")
-	private String linkdin;
+    @Column(name = "linkdin", length = 255)
+    @Size(max = 255, message = "LinkedIn URL cannot exceed 255 characters")
+    private String linkdin;
 
-	@Column(name = "github")
-	private String github;
-	
-	@Column(name="message")
-	private String message;
+    @Column(name = "github", length = 255)
+    @Size(max = 255, message = "GitHub URL cannot exceed 255 characters")
+    private String github;
+
+    @Column(name = "message", length = 65534, columnDefinition = "TEXT")
+    @Size(max = 65534, message = "Message cannot exceed 65,534 characters")
+    private String message;
 
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "detailsEducation", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Education> education = new ArrayList<>();
@@ -109,11 +128,11 @@ public class BesicDetails extends BaseEntity {
 	public BesicDetails(String first_name, String last_name, @Email String email, String phone, String profession,
 			String city, String country, String linkdin, String github, String message, List<Education> education,
 			List<Experiance> experiance, List<Skill> skills,List<Project>projects) {
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.firstName = first_name;
+		this.lastName = last_name;
 		this.email = email;
 		this.phone = phone;
-		Profession = profession;
+		this.profession = profession;
 		this.city = city;
 		this.country = country;
 		this.linkdin = linkdin;
@@ -126,19 +145,19 @@ public class BesicDetails extends BaseEntity {
 	}
 
 	public String getFirst_name() {
-		return first_name;
+		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirst_name(String first_name) { 
+		this.firstName = first_name;
 	}
 
 	public String getLast_name() {
-		return last_name;
+		return lastName;
 	}
 
 	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+		this.lastName = last_name;
 	}
 
 	public String getEmail() {
@@ -158,11 +177,11 @@ public class BesicDetails extends BaseEntity {
 	}
 
 	public String getProfession() {
-		return Profession;
+		return profession;
 	}
 
 	public void setProfession(String profession) {
-		Profession = profession;
+		this.profession = profession;
 	}
 
 	public String getCity() {
@@ -240,8 +259,8 @@ public class BesicDetails extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "BesicDetails [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", phone="
-				+ phone + ", Profession=" + Profession + ", city=" + city + ", country=" + country + ", linkdin="
+		return "BesicDetails [first_name=" + firstName + ", last_name=" + lastName + ", email=" + email + ", phone="
+				+ phone + ", Profession=" + profession + ", city=" + city + ", country=" + country + ", linkdin="
 				+ linkdin + ", github=" + github + ", message=" + message + ", education=" + education + ", experiance="
 				+ experiance + ", skills=" + skills + ", projects=" + projects + "]";
 	}

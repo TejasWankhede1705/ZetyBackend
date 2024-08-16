@@ -9,27 +9,35 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "project")
 public class Project extends BaseEntity {
 
-	@Column(name = "title")
-	private String ProjectTitle;
+	@Column(name = "title", length = 100)
+    @NotEmpty(message = "Project title cannot be empty")
+    @Size(max = 100, message = "Project title cannot exceed 100 characters")
+    private String projectTitle;
 
-	@Column(name = "role")
-	private String ProjectRole;
+    @Column(name = "role", length = 100)
+    @NotEmpty(message = "Project role cannot be empty")
+    @Size(max = 100, message = "Project role cannot exceed 100 characters")
+    private String projectRole;
 
-	@ElementCollection
-	@CollectionTable(name = "techStacks", joinColumns = @JoinColumn(name = "project_id"))
+    @ElementCollection
+    @CollectionTable(name = "tech_stacks", joinColumns = @JoinColumn(name = "project_id"))
+    @NotEmpty(message = "Tech stack cannot be empty")
+    private List<String> techstack;
 
-	private List<String> Techstack;
+    @Column(name = "link", length = 255)
+    @Size(max = 255, message = "Project link cannot exceed 255 characters")
+    private String projectLink;
 
-	@Column(name = "link")
-	private String ProjectLink;
-
-	@Column(name = "description")
-	private String Description;
+    @Column(name = "description", columnDefinition = "TEXT")
+    @Size(max = 65534, message = "Description cannot exceed 65,534 characters")
+    private String description;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
@@ -38,11 +46,11 @@ public class Project extends BaseEntity {
 	public Project(String projectTitle, String projectRole, List<String> techstack, String projectLink,
 			String description, BesicDetails detailsProject) {
 		super();
-		ProjectTitle = projectTitle;
-		ProjectRole = projectRole;
-		Techstack = techstack;
-		ProjectLink = projectLink;
-		Description = description;
+		this.projectTitle = projectTitle;
+		this.projectRole = projectRole;
+		this.techstack = techstack;
+		this.projectLink = projectLink;
+		this.description = description;
 		this.detailsProject = detailsProject;
 	}
 
@@ -51,43 +59,43 @@ public class Project extends BaseEntity {
 	}
 
 	public String getProjectTitle() {
-		return ProjectTitle;
+		return projectTitle;
 	}
 
 	public void setProjectTitle(String projectTitle) {
-		ProjectTitle = projectTitle;
+		this.projectTitle = projectTitle;
 	}
 
 	public String getProjectRole() {
-		return ProjectRole;
+		return projectRole;
 	}
 
 	public void setProjectRole(String projectRole) {
-		ProjectRole = projectRole;
+		this.projectRole = projectRole;
 	}
 
 	public List<String> getTechstack() {
-		return Techstack;
+		return this.techstack;
 	}
 
 	public void setTechstack(List<String> techstack) {
-		Techstack = techstack;
+		this.techstack = techstack;
 	}
 
 	public String getProjectLink() {
-		return ProjectLink;
+		return this.projectLink;
 	}
 
 	public void setProjectLink(String projectLink) {
-		ProjectLink = projectLink;
+		this.projectLink = projectLink;
 	}
 
 	public String getDescription() {
-		return Description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
 	public BesicDetails getDetailsProject() {
@@ -100,8 +108,8 @@ public class Project extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Project [ProjectTitle=" + ProjectTitle + ", ProjectRole=" + ProjectRole + ", Techstack=" + Techstack
-				+ ", ProjectLink=" + ProjectLink + ", Description=" + Description + "]";
+		return "Project [ProjectTitle=" + projectTitle + ", ProjectRole=" + projectRole + ", Techstack=" + techstack
+				+ ", ProjectLink=" + projectLink + ", Description=" + description + "]";
 	}
 	
 	

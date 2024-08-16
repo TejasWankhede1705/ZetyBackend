@@ -12,6 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +34,8 @@ public class Skill extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private BesicDetails detailsSkill;
     
+    @Column(name = "languages", columnDefinition = "TEXT")
+    @Size(max = 65534, message = "Languages cannot exceed 65,534 characters")
     private String languages;
 
     public Skill() {}
