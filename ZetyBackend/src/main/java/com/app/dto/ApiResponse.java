@@ -16,14 +16,32 @@ public class ApiResponse {
 	
 	private String message;
 	
+	private boolean success;
+	
 
 	public ApiResponse() {}
-
-	public ApiResponse(String message) {
+	
+	public ApiResponse( String message) {
 		this.message = message;
 		this.timeStamp = LocalDateTime.now();
 	}
+	
+	
+	public ApiResponse(boolean success, String message) {
+		this.success = success;
+		this.message = message;
+		this.timeStamp = LocalDateTime.now();
+	}
+	
+	public boolean isSuccess() {
+		return success;
+	}
 
+	// Setter for the success field
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+	
 	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}

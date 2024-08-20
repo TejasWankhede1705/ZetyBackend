@@ -17,8 +17,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-
-
 @Entity
 @Table(name = "besic_details")
 public class BesicDetails extends BaseEntity {
@@ -82,7 +80,7 @@ public class BesicDetails extends BaseEntity {
 	
 	@OneToOne
 	@MapsId
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
 	// helper methods

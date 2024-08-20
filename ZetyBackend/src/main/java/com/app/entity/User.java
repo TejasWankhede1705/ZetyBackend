@@ -33,4 +33,27 @@ public class User extends BaseEntity {
 	public User() {
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public BesicDetails getBesicDetails() {
+		return besicDetails;
+	}
+
+	public void setBesicDetails(BesicDetails besicDetails) {
+		this.besicDetails = besicDetails;
+	}
 }
