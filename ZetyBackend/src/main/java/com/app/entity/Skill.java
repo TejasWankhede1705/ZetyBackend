@@ -32,7 +32,7 @@ public class Skill extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private BesicDetails detailsSkill;
+    private BasicDetails detailsSkill;
     
     @Column(name = "languages", columnDefinition = "TEXT")
     @Size(max = 65534, message = "Languages cannot exceed 65,534 characters")
@@ -63,11 +63,11 @@ public class Skill extends BaseEntity {
 		this.skillType = skillType;
 	}
 
-	public BesicDetails getDetailsSkill() {
+	public BasicDetails getDetailsSkill() {
 		return detailsSkill;
 	}
 
-	public void setDetailsSkill(BesicDetails detailsSkill) {
+	public void setDetailsSkill(BasicDetails detailsSkill) {
 		this.detailsSkill = detailsSkill;
 	}
 

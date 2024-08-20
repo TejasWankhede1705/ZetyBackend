@@ -19,7 +19,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "besic_details")
-public class BesicDetails extends BaseEntity {
+public class BasicDetails extends BaseEntity {
 
 	@Column(name = "first_name", length = 100)
     @NotEmpty(message = "First name cannot be empty")
@@ -31,7 +31,11 @@ public class BesicDetails extends BaseEntity {
     @Size(max = 100, message = "Last name cannot exceed 100 characters")
     private String lastName;
 
-   
+    @Column(name = "email", length = 100)
+	@Email(message = "Email should be valid")
+	@NotEmpty(message = "Email cannot be empty")
+	private String email;
+
 
     @Column(name = "phone", length = 10)
     @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
@@ -124,26 +128,10 @@ public class BesicDetails extends BaseEntity {
 	}
 
 	
-	public BesicDetails() {}
 	
-	public BesicDetails(String first_name, String last_name,  String phone, String profession,
-			String city, String country, String linkdin, String github, String message, List<Education> education,
-			List<Experiance> experiance, List<Skill> skills,List<Project>projects) {
-		this.firstName = first_name;
-		this.lastName = last_name;
-		this.phone = phone;
-		this.profession = profession;
-		this.city = city;
-		this.country = country;
-		this.linkdin = linkdin;
-		this.github = github;
-		this.message = message;
-		this.education = education;
-		this.experiance = experiance;
-		this.skills = skills;
-		this.projects = projects;
-	}
+	
 
+	
 	public String getFirst_name() {
 		return firstName;
 	}
@@ -160,7 +148,15 @@ public class BesicDetails extends BaseEntity {
 		this.lastName = last_name;
 	}
 
+	
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getPhone() {
 		return phone;
@@ -249,7 +245,16 @@ public class BesicDetails extends BaseEntity {
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
+	
+	
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {

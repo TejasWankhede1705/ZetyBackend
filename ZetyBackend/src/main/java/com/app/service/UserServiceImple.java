@@ -12,26 +12,29 @@ import com.app.entity.User;
 @Service
 @Transactional
 public class UserServiceImple implements UserService {
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
-    private PasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public ApiResponse userRegister(SignupDto signupDto) {
-		if(userDao.existsByEmail(signupDto.getEmail())) {
-			return new ApiResponse(false,"Email already exists");
+		if (!signupDto.getPassword().equals(signupDto.getConfirmpassword())) {
+			return new ApiResponse(false, "password dosen't match!");
 		}
-		if(!signupDto.getPassword().equals(signupDto.getConfirmpassword())) {
-			return new ApiResponse(false,"password dosen't match!");
+
+		if (userDao.existsByEmail(signupDto.getEmail())) {
+			return new ApiResponse(false, "Email already exists");
 		}
-		User user=new User();
+
+		User user = new User();
 		user.setEmail(signupDto.getEmail());
 		user.setPassword(passwordEncoder.encode(signupDto.getPassword()));
 		userDao.save(user);
-		return new ApiResponse(true,"User registered successfully");
-		
+		return new ApiResponse(true, "User registered successfully");
+
 	}
+
 }

@@ -13,7 +13,7 @@ import com.app.dao.ProjectDao;
 import com.app.dto.ApiResponse;
 import com.app.dto.ProjectDto;
 import com.app.dto.ResponseProjectDto;
-import com.app.entity.BesicDetails;
+import com.app.entity.BasicDetails;
 import com.app.entity.Project;
 
 @Service
@@ -33,9 +33,9 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		Project project = mapper.map(dto, Project.class);
 		
-		BesicDetails besicDetails = besicDetailsDao.findById(dto.getUser_Id()).orElseThrow(()->new RersourseNotFoundException("User Cannot be found"));
+		BasicDetails basicDetails = besicDetailsDao.findById(dto.getUser_Id()).orElseThrow(()->new RersourseNotFoundException("User Cannot be found"));
 		
-		besicDetails.addProject(project);
+		basicDetails.addProject(project);
 		
 		projectDao.save(project);
 		
@@ -45,9 +45,9 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<ResponseProjectDto> getProject(Long userId) {
 		
-		BesicDetails besicDetails = besicDetailsDao.findById(userId).orElseThrow(()->new RersourseNotFoundException("User Cannot be found"));
+		BasicDetails basicDetails = besicDetailsDao.findById(userId).orElseThrow(()->new RersourseNotFoundException("User Cannot be found"));
 
-		return besicDetails.getProjects().stream()
+		return basicDetails.getProjects().stream()
 				.map(p->mapper.map(p, ResponseProjectDto.class))
 				.collect(Collectors.toList());
 	}
@@ -69,9 +69,9 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		Project project = projectDao.findById(id).orElseThrow(()-> new RersourseNotFoundException("Project Details Cannot be found"));
 		
-		BesicDetails besicDetails = besicDetailsDao.findById(project.getDetailsProject().getId()).orElseThrow(()->new RersourseNotFoundException("User Cannot be found"));
+		BasicDetails basicDetails = besicDetailsDao.findById(project.getDetailsProject().getId()).orElseThrow(()->new RersourseNotFoundException("User Cannot be found"));
 
-		besicDetails.removeProject(project);
+		basicDetails.removeProject(project);
 		
 		projectDao.delete(project);
 		

@@ -54,13 +54,13 @@ public class Education extends BaseEntity{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",nullable=false)
-	private BesicDetails detailsEducation;
+	private BasicDetails detailsEducation;
 	
 	public Education() {}
 	
 	public Education(String schoolName, String schoolLocation, String fieldOfStudy, String graduationYear,
 			Degree degree, Months month, boolean isGapTaken, String gapYear, List<String> certification,
-			BesicDetails detailsEducation) {
+			BasicDetails detailsEducation) {
 		SchoolName = schoolName;
 		SchoolLocation = schoolLocation;
 		FieldOfStudy = fieldOfStudy;
@@ -117,11 +117,11 @@ public class Education extends BaseEntity{
 		this.degree = degree;
 	}
 
-	public BesicDetails getDetailsEducation() {
+	public BasicDetails getDetailsEducation() {
 		return detailsEducation;
 	}
 
-	public void setDetailsEducation(BesicDetails detailsEducation) {
+	public void setDetailsEducation(BasicDetails detailsEducation) {
 		this.detailsEducation = detailsEducation;
 	}
 

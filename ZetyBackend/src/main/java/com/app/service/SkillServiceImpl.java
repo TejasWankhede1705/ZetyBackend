@@ -11,7 +11,7 @@ import com.app.dao.BesicDetailsDao;
 import com.app.dao.SkillDao;
 import com.app.dto.ApiResponse;
 import com.app.dto.SkillDto;
-import com.app.entity.BesicDetails;
+import com.app.entity.BasicDetails;
 import com.app.entity.Skill;
 
 @Service
@@ -30,7 +30,7 @@ public class SkillServiceImpl implements SkillService {
 	@Override
 	public ApiResponse addSkills(SkillDto dto) {
 		Skill skills = new Skill(dto.getSkills(), dto.getSkillType(), dto.getLanguages());
-		BesicDetails details = basicDetailsDao.findById(dto.getUserId())
+		BasicDetails details = basicDetailsDao.findById(dto.getUserId())
 				.orElseThrow(() -> new RersourseNotFoundException("User not found"));
 
 		details.addSkill(skills);
@@ -40,7 +40,7 @@ public class SkillServiceImpl implements SkillService {
 
 	@Override
 	public List<SkillDto> getSkills(Long userId) {
-		BesicDetails b = basicDetailsDao.findById(userId)
+		BasicDetails b = basicDetailsDao.findById(userId)
 				.orElseThrow(() -> new RersourseNotFoundException("User Not Found"));
 
 //		List<Skill> skills = b.getSkills();
@@ -72,7 +72,7 @@ public class SkillServiceImpl implements SkillService {
 
 		Skill skill = dao.findById(id).orElseThrow(() -> new RersourseNotFoundException("Skill not found"));
 
-		BesicDetails b = basicDetailsDao.findById(skill.getDetailsSkill().getId())
+		BasicDetails b = basicDetailsDao.findById(skill.getDetailsSkill().getId())
 				.orElseThrow(() -> new RersourseNotFoundException("User Cannot be found"));
 
 		dao.delete(skill);

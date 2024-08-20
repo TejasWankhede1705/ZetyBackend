@@ -33,7 +33,7 @@ public class Experiance extends BaseEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id",nullable=false)
-	private BesicDetails detailsExperiance ;
+	private BasicDetails detailsExperiance ;
 
 	@ElementCollection
 	@CollectionTable(name = "responsibility", joinColumns = @JoinColumn(name = "experience_id"))
@@ -43,7 +43,7 @@ public class Experiance extends BaseEntity {
 	public Experiance() {}
 
 	public Experiance(String title, String company, String location, LocalDate startDate, LocalDate endDate,
-			BesicDetails detailsExperiance, List<String> responsibility) {
+			BasicDetails detailsExperiance, List<String> responsibility) {
 		Title = title;
 		Company = company;
 		Location = location;
@@ -93,11 +93,11 @@ public class Experiance extends BaseEntity {
 		EndDate = endDate;
 	}
 
-	public BesicDetails getDetailsExperiance() {
+	public BasicDetails getDetailsExperiance() {
 		return detailsExperiance;
 	}
 
-	public void setDetailsExperiance(BesicDetails detailsExperiance) {
+	public void setDetailsExperiance(BasicDetails detailsExperiance) {
 		this.detailsExperiance = detailsExperiance;
 	}
 

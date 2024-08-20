@@ -2,7 +2,7 @@ package com.app.service;
 
 import com.app.dto.ApiResponse;
 import com.app.dto.EducationDto;
-import com.app.entity.BesicDetails;
+import com.app.entity.BasicDetails;
 import com.app.entity.Education;
 
 import jakarta.transaction.Transactional;
@@ -45,7 +45,7 @@ public class EducationServiceImpl implements EducationSerivce {
         }
         
         Education education = mapper.map(dto, Education.class);
-                BesicDetails basicDetails = besicDetailsDao.findById(dto.getUserId())
+                BasicDetails basicDetails = besicDetailsDao.findById(dto.getUserId())
                 .orElseThrow(() -> new RersourseNotFoundException("User not found"));
        
                 basicDetails.addEducation(education);
@@ -60,7 +60,7 @@ public class EducationServiceImpl implements EducationSerivce {
     public List<EducationDto> getEducation(Long userId) {
         logger.info("Fetching education details for user ID: {}", userId);
 
-        BesicDetails basicDetails = besicDetailsDao.findById(userId)
+        BasicDetails basicDetails = besicDetailsDao.findById(userId)
                 .orElseThrow(() -> new RersourseNotFoundException("Education Not Found"));
 
         List<EducationDto> educationList = basicDetails.getEducation().stream()
@@ -95,7 +95,7 @@ public class EducationServiceImpl implements EducationSerivce {
 	public ApiResponse deleteEducation(Long id) {
 		Education e = educationDao.findById(id).orElseThrow(()-> new RersourseNotFoundException("Education details cannot be found"));
 		
-		BesicDetails b = besicDetailsDao.findById(e.getDetailsEducation().getId()).orElseThrow(()-> new RersourseNotFoundException("User cannot be found"));
+		BasicDetails b = besicDetailsDao.findById(e.getDetailsEducation().getId()).orElseThrow(()-> new RersourseNotFoundException("User cannot be found"));
 		
 		educationDao.delete(e);
 		

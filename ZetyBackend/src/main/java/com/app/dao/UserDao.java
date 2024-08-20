@@ -12,6 +12,8 @@ import com.app.entity.User;
 public interface UserDao extends JpaRepository<User, Long> {
 	boolean existsByEmail(String emial);
 	
+	User findByEmail(String email);
 	
+	Optional<User>findByEmailAndPassword(String email, String password);
 
 }

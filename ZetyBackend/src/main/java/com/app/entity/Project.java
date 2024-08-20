@@ -41,10 +41,10 @@ public class Project extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
-	private BesicDetails detailsProject;
+	private BasicDetails detailsProject;
 
 	public Project(String projectTitle, String projectRole, List<String> techstack, String projectLink,
-			String description, BesicDetails detailsProject) {
+			String description, BasicDetails detailsProject) {
 		super();
 		this.projectTitle = projectTitle;
 		this.projectRole = projectRole;
@@ -98,11 +98,11 @@ public class Project extends BaseEntity {
 		this.description = description;
 	}
 
-	public BesicDetails getDetailsProject() {
+	public BasicDetails getDetailsProject() {
 		return detailsProject;
 	}
 
-	public void setDetailsProject(BesicDetails detailsProject) {
+	public void setDetailsProject(BasicDetails detailsProject) {
 		this.detailsProject = detailsProject;
 	}
 

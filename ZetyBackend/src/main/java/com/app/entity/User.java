@@ -13,9 +13,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "user")
-@Getter
-@Setter
-@NoArgsConstructor
+
 
 public class User extends BaseEntity {
 
@@ -28,10 +26,9 @@ public class User extends BaseEntity {
 	private String password;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private BesicDetails besicDetails;
+	private BasicDetails basicDetails;
 
-	public User() {
-	}
+	
 
 	public String getEmail() {
 		return email;
@@ -49,11 +46,11 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public BesicDetails getBesicDetails() {
-		return besicDetails;
+	public BasicDetails getBesicDetails() {
+		return basicDetails;
 	}
 
-	public void setBesicDetails(BesicDetails besicDetails) {
-		this.besicDetails = besicDetails;
+	public void setBesicDetails(BasicDetails basicDetails) {
+		this.basicDetails = basicDetails;
 	}
 }

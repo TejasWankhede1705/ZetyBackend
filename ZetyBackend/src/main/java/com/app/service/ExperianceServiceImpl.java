@@ -10,7 +10,7 @@ import com.app.dao.BesicDetailsDao;
 import com.app.dao.ExperianceDao;
 import com.app.dto.ApiResponse;
 import com.app.dto.ExperianceDto;
-import com.app.entity.BesicDetails;
+import com.app.entity.BasicDetails;
 import com.app.entity.Experiance;
 
 import jakarta.transaction.Transactional;
@@ -30,7 +30,7 @@ public class ExperianceServiceImpl implements ExperianceService {
     @Override
     public ApiResponse addExperiance(ExperianceDto dto) {
         Experiance e = mapper.map(dto, Experiance.class);
-        BesicDetails b = besicDetailsdao.findById(dto.getUserId()).orElseThrow(() -> new RersourseNotFoundException("User not found"));
+        BasicDetails b = besicDetailsdao.findById(dto.getUserId()).orElseThrow(() -> new RersourseNotFoundException("User not found"));
         e.setDetailsExperiance(b);
         experiancedao.save(e);
         return new ApiResponse("Experience Details added Successfully");
@@ -38,7 +38,7 @@ public class ExperianceServiceImpl implements ExperianceService {
 
     @Override
     public List<ExperianceDto> getExperiance(Long userId) {
-        BesicDetails b = besicDetailsdao.findById(userId)
+        BasicDetails b = besicDetailsdao.findById(userId)
                 .orElseThrow(() -> new RersourseNotFoundException("User Not Found"));
 
         return b.getExperiance().stream()
@@ -63,7 +63,7 @@ public class ExperianceServiceImpl implements ExperianceService {
 	public ApiResponse deleteExperiance(Long id) {
 		Experiance e = experiancedao.findById(id).orElseThrow(()->new RersourseNotFoundException("experiance cannot be found"));
 		
-		BesicDetails b = besicDetailsdao.findById(e.getDetailsExperiance().getId()).orElseThrow(()->new RersourseNotFoundException("user cannot be found"));
+		BasicDetails b = besicDetailsdao.findById(e.getDetailsExperiance().getId()).orElseThrow(()->new RersourseNotFoundException("user cannot be found"));
 		
 		experiancedao.delete(e);
 		
