@@ -7,7 +7,10 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -30,10 +33,7 @@ public class BesicDetails extends BaseEntity {
     @Size(max = 100, message = "Last name cannot exceed 100 characters")
     private String lastName;
 
-    @Column(name = "email", length = 100)
-    @Email(message = "Email should be valid")
-    @NotEmpty(message = "Email cannot be empty")
-    private String email;
+   
 
     @Column(name = "phone", length = 10)
     @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
@@ -80,7 +80,10 @@ public class BesicDetails extends BaseEntity {
 	@OneToMany(mappedBy = "detailsProject", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Project> projects = new ArrayList<>();
 	
-
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	// helper methods
 	public void addEducation(Education e) {
@@ -125,12 +128,11 @@ public class BesicDetails extends BaseEntity {
 	
 	public BesicDetails() {}
 	
-	public BesicDetails(String first_name, String last_name, @Email String email, String phone, String profession,
+	public BesicDetails(String first_name, String last_name,  String phone, String profession,
 			String city, String country, String linkdin, String github, String message, List<Education> education,
 			List<Experiance> experiance, List<Skill> skills,List<Project>projects) {
 		this.firstName = first_name;
 		this.lastName = last_name;
-		this.email = email;
 		this.phone = phone;
 		this.profession = profession;
 		this.city = city;
@@ -160,13 +162,7 @@ public class BesicDetails extends BaseEntity {
 		this.lastName = last_name;
 	}
 
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getPhone() {
 		return phone;
@@ -259,7 +255,7 @@ public class BesicDetails extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "BesicDetails [first_name=" + firstName + ", last_name=" + lastName + ", email=" + email + ", phone="
+		return "BesicDetails [first_name=" + firstName + ", last_name=" + lastName +  ", phone="
 				+ phone + ", Profession=" + profession + ", city=" + city + ", country=" + country + ", linkdin="
 				+ linkdin + ", github=" + github + ", message=" + message + ", education=" + education + ", experiance="
 				+ experiance + ", skills=" + skills + ", projects=" + projects + "]";

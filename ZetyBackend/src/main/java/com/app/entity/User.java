@@ -1,13 +1,15 @@
 package com.app.entity;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Entity
 @Table(name = "user")
@@ -15,30 +17,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class User extends BaseEntity{
-	
-	@Column(name = "username")
-	private String username;
-	
-	@Column(name = "email")
+public class User extends BaseEntity {
+
+	@Column(name = "email", length = 100)
+	@Email(message = "Email should be valid")
+	@NotEmpty(message = "Email cannot be empty")
 	private String email;
-	
+
 	@Column(name = "password")
 	private String password;
-	
-	public User() {}
 
-	public User(String username, String email, String password) {
-		super();
-		this.username = username;
-		this.email = email;
-		this.password = password;
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private BesicDetails besicDetails;
+
+	public User() {
 	}
 
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", email=" + email + ", password=" + password + "]";
-	}
-		
-	
 }
