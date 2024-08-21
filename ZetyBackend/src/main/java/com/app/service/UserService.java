@@ -15,7 +15,7 @@ public interface UserService {
 	
 //    String authenticateUser(LoginDTO loginDTO);
 
-    String authenticateUser(LoginDTO loginDTO);
+    ApiResponse authenticateUser(LoginDTO loginDTO);
 
 	
 	

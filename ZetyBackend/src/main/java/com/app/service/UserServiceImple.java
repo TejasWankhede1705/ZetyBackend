@@ -41,15 +41,24 @@ public class UserServiceImple implements UserService {
 
 	}
 
+	
 	@Override
-    public String authenticateUser(LoginDTO loginDTO) {
-        Optional<User> user = userDao.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
+    public ApiResponse authenticateUser(LoginDTO loginDTO) {
+        // Fetch the user by email
+        Optional<User> user = userDao.findByEmail(loginDTO.getEmail());
 
+        // Check if the user exists
         if (user.isPresent()) {
-            return "User login successful";
+            // 2. Use passwordEncoder.matches() to validate the plain text password against the encrypted one
+            if (passwordEncoder.matches(loginDTO.getPassword(), user.get().getPassword())) {
+                return new ApiResponse(true, "User login successful");
+            } else {
+                return new ApiResponse(false, "Invalid password");
+            }
         } else {
-            throw new RuntimeException("Invalid email/username or password");
+            return new ApiResponse(false, "Invalid email");
         }
     }
+
 
 }
