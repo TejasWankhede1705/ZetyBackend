@@ -22,54 +22,53 @@ import jakarta.validation.constraints.Size;
 public class BasicDetails extends BaseEntity {
 
 	@Column(name = "first_name", length = 100)
-    @NotEmpty(message = "First name cannot be empty")
-    @Size(max = 100, message = "First name cannot exceed 100 characters")
-    private String firstName;
+	@NotEmpty(message = "First name cannot be empty")
+	@Size(max = 100, message = "First name cannot exceed 100 characters")
+	private String firstName;
 
-    @Column(name = "last_name", length = 100)
-    @NotEmpty(message = "Last name cannot be empty")
-    @Size(max = 100, message = "Last name cannot exceed 100 characters")
-    private String lastName;
+	@Column(name = "last_name", length = 100)
+	@NotEmpty(message = "Last name cannot be empty")
+	@Size(max = 100, message = "Last name cannot exceed 100 characters")
+	private String lastName;
 
-    @Column(name = "email", length = 100)
+	@Column(name = "email", length = 100)
 	@Email(message = "Email should be valid")
 	@NotEmpty(message = "Email cannot be empty")
 	private String email;
 
+	@Column(name = "phone", length = 10)
+	@Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+	@NotEmpty(message = "Phone number cannot be empty")
+	private String phone;
 
-    @Column(name = "phone", length = 10)
-    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
-    @NotEmpty(message = "Phone number cannot be empty")
-    private String phone;
+	@Column(name = "profession", length = 100)
+	@NotEmpty(message = "Profession cannot be empty")
+	@Size(max = 100, message = "Profession cannot exceed 100 characters")
+	private String profession;
 
-    @Column(name = "profession", length = 100)
-    @NotEmpty(message = "Profession cannot be empty")
-    @Size(max = 100, message = "Profession cannot exceed 100 characters")
-    private String profession;
+	@Column(name = "city", length = 100)
+	@NotEmpty(message = "City cannot be empty")
+	@Size(max = 100, message = "City cannot exceed 100 characters")
+	private String city;
 
-    @Column(name = "city", length = 100)
-    @NotEmpty(message = "City cannot be empty")
-    @Size(max = 100, message = "City cannot exceed 100 characters")
-    private String city;
+	@Column(name = "country", length = 100)
+	@NotEmpty(message = "Country cannot be empty")
+	@Size(max = 100, message = "Country cannot exceed 100 characters")
+	private String country;
 
-    @Column(name = "country", length = 100)
-    @NotEmpty(message = "Country cannot be empty")
-    @Size(max = 100, message = "Country cannot exceed 100 characters")
-    private String country;
+	@Column(name = "linkdin", length = 255)
+	@Size(max = 255, message = "LinkedIn URL cannot exceed 255 characters")
+	private String linkdin;
 
-    @Column(name = "linkdin", length = 255)
-    @Size(max = 255, message = "LinkedIn URL cannot exceed 255 characters")
-    private String linkdin;
+	@Column(name = "github", length = 255)
+	@Size(max = 255, message = "GitHub URL cannot exceed 255 characters")
+	private String github;
 
-    @Column(name = "github", length = 255)
-    @Size(max = 255, message = "GitHub URL cannot exceed 255 characters")
-    private String github;
+	@Column(name = "message", length = 65534, columnDefinition = "TEXT")
+	@Size(max = 65534, message = "Message cannot exceed 65,534 characters")
+	private String message;
 
-    @Column(name = "message", length = 65534, columnDefinition = "TEXT")
-    @Size(max = 65534, message = "Message cannot exceed 65,534 characters")
-    private String message;
-
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "detailsEducation", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "detailsEducation", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Education> education = new ArrayList<>();
 
 	@OneToMany(mappedBy = "detailsExperiance", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -77,11 +76,10 @@ public class BasicDetails extends BaseEntity {
 
 	@OneToMany(mappedBy = "detailsSkill", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Skill> skills = new ArrayList<>();
-	
 
 	@OneToMany(mappedBy = "detailsProject", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Project> projects = new ArrayList<>();
-	
+
 	@OneToOne
 	@MapsId
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -98,7 +96,7 @@ public class BasicDetails extends BaseEntity {
 		e.setDetailsEducation(null);
 	}
 
-	// helper method for experiance 
+	// helper method for experiance
 	public void addExperance(Experiance e) {
 		experiance.add(e);
 		e.setDetailsExperiance(this);
@@ -108,35 +106,33 @@ public class BasicDetails extends BaseEntity {
 		experiance.remove(e);
 		e.setDetailsExperiance(null);
 	}
-	
-	//helper method for Skills
+
+	// helper method for Skills
 	public void addSkill(Skill s) {
 		skills.add(s);
 		s.setDetailsSkill(this);
 	}
+
 	public void removeSkill(Skill s) {
 		skills.remove(s);
 		s.setDetailsSkill(null);
 	}
+
 	public void addProject(Project p) {
 		projects.add(p);
 		p.setDetailsProject(this);
 	}
+
 	public void removeProject(Project p) {
 		projects.remove(p);
 		p.setDetailsProject(null);
 	}
 
-	
-	
-	
-
-	
 	public String getFirst_name() {
 		return firstName;
 	}
 
-	public void setFirst_name(String first_name) { 
+	public void setFirst_name(String first_name) {
 		this.firstName = first_name;
 	}
 
@@ -147,8 +143,6 @@ public class BasicDetails extends BaseEntity {
 	public void setLast_name(String last_name) {
 		this.lastName = last_name;
 	}
-
-	
 
 	public String getEmail() {
 		return email;
@@ -237,7 +231,7 @@ public class BasicDetails extends BaseEntity {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	public List<Project> getProjects() {
 		return projects;
 	}
@@ -245,8 +239,6 @@ public class BasicDetails extends BaseEntity {
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
-	
-	
 
 	public User getUser() {
 		return user;
@@ -258,11 +250,10 @@ public class BasicDetails extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "BesicDetails [first_name=" + firstName + ", last_name=" + lastName +  ", phone="
-				+ phone + ", Profession=" + profession + ", city=" + city + ", country=" + country + ", linkdin="
-				+ linkdin + ", github=" + github + ", message=" + message + ", education=" + education + ", experiance="
+		return "BesicDetails [first_name=" + firstName + ", last_name=" + lastName + ", phone=" + phone
+				+ ", Profession=" + profession + ", city=" + city + ", country=" + country + ", linkdin=" + linkdin
+				+ ", github=" + github + ", message=" + message + ", education=" + education + ", experiance="
 				+ experiance + ", skills=" + skills + ", projects=" + projects + "]";
 	}
-
 
 }
