@@ -1,12 +1,16 @@
 package com.app.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.app.dao.UserDao;
 import com.app.dto.ApiResponse;
+import com.app.dto.LoginDTO;
 import com.app.dto.SignupDto;
+import com.app.dto.UserDto;
 import com.app.entity.User;
 
 @Service
@@ -36,5 +40,16 @@ public class UserServiceImple implements UserService {
 		return new ApiResponse(true, "User registered successfully");
 
 	}
+
+	@Override
+    public String authenticateUser(LoginDTO loginDTO) {
+        Optional<User> user = userDao.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
+
+        if (user.isPresent()) {
+            return "User login successful";
+        } else {
+            throw new RuntimeException("Invalid email/username or password");
+        }
+    }
 
 }
