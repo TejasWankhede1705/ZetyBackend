@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.app.custum_exception.RersourseNotFoundException;
 import com.app.dao.UserDao;
 import com.app.dto.ApiResponse;
+import com.app.dto.PasswordResetDto;
 import com.app.dto.LoginDTO;
 import com.app.dto.SignupDto;
 import com.app.dto.UserDto;
@@ -43,13 +46,29 @@ public class UserServiceImple implements UserService {
 
 	
 	@Override
+	public ApiResponse resetUserPassword(PasswordResetDto passwordResetDto) {
+		
+		User user = userDao.findByEmail(passwordResetDto.getEmail()).
+				orElseThrow(()->new RersourseNotFoundException("User cannot be found with this email"));
+		
+		if(!passwordResetDto.getNewPassword().equals(passwordResetDto.getConfirmNewPassword())) {
+			
+			return new ApiResponse(false,"Password dosent match!");
+		}
+		
+		user.setPassword(passwordEncoder.encode(passwordResetDto.getNewPassword()));
+		
+		return new ApiResponse(true,"password reset sucsessfulyy");
+	}
+	
+	
+	
+	
     public ApiResponse authenticateUser(LoginDTO loginDTO) {
-        // Fetch the user by email
         Optional<User> user = userDao.findByEmail(loginDTO.getEmail());
 
-        // Check if the user exists
+        // for Check if the user exists
         if (user.isPresent()) {
-            // 2. Use passwordEncoder.matches() to validate the plain text password against the encrypted one
             if (passwordEncoder.matches(loginDTO.getPassword(), user.get().getPassword())) {
                 return new ApiResponse(true, "User login successful");
             } else {
@@ -59,6 +78,8 @@ public class UserServiceImple implements UserService {
             return new ApiResponse(false, "Invalid email");
         }
     }
+
+
 
 
 }

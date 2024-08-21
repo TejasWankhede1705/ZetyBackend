@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.ApiResponse;
+import com.app.dto.PasswordResetDto;
 import com.app.dto.SignupDto;
 import com.app.service.UserService;
 
@@ -33,9 +34,14 @@ public class UserController {
             return ResponseEntity.badRequest().body(response);
         }
 	}
-//	
-//	@PostMapping
-//	public ResponseEntity<?>fogetPassword()
-//	
+	
+	@PostMapping("/resetPassword")
+	public ResponseEntity<?>resetPassword(@RequestBody PasswordResetDto passwordResetDto){
+		
+		
+		
+		return ResponseEntity.ok(service.resetUserPassword(passwordResetDto));
+	}
+	
 	
 }

@@ -40,7 +40,7 @@ public class BasicDetailsServiceImpl implements BasicDetailsService {
     @Override
     public ApiResponse addBasicDetails(BesicDetailsDto details) { // Renamed method
        
-    	User user =  userDao.findByEmail(details.getEmail());
+    	User user =  userDao.findByEmail(details.getEmail()).orElseThrow(()-> new RersourseNotFoundException("user cannot be found"));
     	
     	if(user == null) {
     		return new ApiResponse("User cannot be found with this email!");
