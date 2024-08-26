@@ -14,7 +14,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "user")
 
-
 public class User extends BaseEntity {
 
 	@Column(name = "email", length = 100)
@@ -25,10 +24,14 @@ public class User extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 
+	@Column(name = "provider")
+	private String provider; // e.g., "GOOGLE"
+
+	@Column(name = "provider_id")
+	private String providerId; // google unique user ID
+
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private BasicDetails basicDetails;
-
-	
 
 	public String getEmail() {
 		return email;
@@ -44,6 +47,22 @@ public class User extends BaseEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public String getProviderId() {
+		return providerId;
+	}
+
+	public void setProviderId(String providerId) {
+		this.providerId = providerId;
 	}
 
 	public BasicDetails getBesicDetails() {

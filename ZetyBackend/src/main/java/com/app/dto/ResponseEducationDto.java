@@ -6,8 +6,8 @@ import com.app.entity.Degree;
 import com.app.entity.Months;
 
 public class ResponseEducationDto {
-
-
+	
+	private int id;
 	private String SchoolName;
 	private String SchoolLocation;
 	private String FieldOfStudy;
@@ -17,6 +17,12 @@ public class ResponseEducationDto {
     private boolean isGapTaken;
     private String gapYear;
     private List<String>certification;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getSchoolName() {
 		return SchoolName;
 	}
@@ -71,6 +77,4 @@ public class ResponseEducationDto {
 	public void setCertification(List<String> certification) {
 		this.certification = certification;
 	}
-    
-    
 }
