@@ -86,19 +86,20 @@ public class BasicDetailsServiceImpl implements BasicDetailsService {
 		
 		CombinedResponseDto responseDto = new CombinedResponseDto();
 		
-		
-		
-		List<ResponseEducationDto>education = basicDetails.getEducation().stream().map(e->mapper.map(e, ResponseEducationDto.class)).
+		List<ResponseEducationDto>education = basicDetails.getEducation()
+				.stream().map(e->mapper.map(e, ResponseEducationDto.class)).
 										collect(Collectors.toList());
 		
-		
-		List<ResponseExperianceDto>experiance = basicDetails.getExperiance().stream().map(e->mapper.map(e, ResponseExperianceDto.class)).
+		List<ResponseExperianceDto>experiance = basicDetails.getExperiance()
+				.stream().map(e->mapper.map(e, ResponseExperianceDto.class)).
 										collect(Collectors.toList());
 		
-		List<ResponseSkillsDto>skills = basicDetails.getSkills().stream().map(s->mapper.map(s, ResponseSkillsDto.class)).
+		List<ResponseSkillsDto>skills = basicDetails.getSkills()
+				.stream().map(s->mapper.map(s, ResponseSkillsDto.class)).
 										collect(Collectors.toList());
 		
-		List<ResponseProjectDto>project = basicDetails.getProjects().stream().map(p->mapper.map(p, ResponseProjectDto.class)).
+		List<ResponseProjectDto>project = basicDetails.getProjects()
+				.stream().map(p->mapper.map(p, ResponseProjectDto.class)).
 										collect(Collectors.toList());
 		
 		BesicDetailsDto besicDetailsDto = mapper.map(basicDetails, BesicDetailsDto.class);

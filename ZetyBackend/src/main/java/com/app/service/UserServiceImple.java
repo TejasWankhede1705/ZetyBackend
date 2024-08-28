@@ -12,11 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.custum_exception.RersourseNotFoundException;
 import com.app.dao.UserDao;
 import com.app.dto.ApiResponse;
+<<<<<<< HEAD
 
 import com.app.dto.PasswordResetDto;
 
 import com.app.dto.LoginDTO;
 
+=======
+import com.app.dto.PasswordResetDto;
+import com.app.dto.LoginDTO;
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
 import com.app.dto.SignupDto;
 import com.app.dto.UserDto;
 import com.app.entity.User;
@@ -49,8 +54,12 @@ public class UserServiceImple implements UserService {
 
 	}
 
+	
 	@Override
+<<<<<<< HEAD
 
+=======
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
 	public ApiResponse resetUserPassword(PasswordResetDto passwordResetDto) {
 		
 		User user = userDao.findByEmail(passwordResetDto.getEmail()).
@@ -68,17 +77,29 @@ public class UserServiceImple implements UserService {
 	
 	
 	
+<<<<<<< HEAD
 
     public String authenticateUser(LoginDTO loginDTO) {
         Optional<User> user = userDao.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
+=======
+	
+    public ApiResponse authenticateUser(LoginDTO loginDTO) {
+        Optional<User> user = userDao.findByEmail(loginDTO.getEmail());
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
 
+        // for Check if the user exists
         if (user.isPresent()) {
-            return "User login successful";
+            if (passwordEncoder.matches(loginDTO.getPassword(), user.get().getPassword())) {
+                return new ApiResponse(true, "User login successful");
+            } else {
+                return new ApiResponse(false, "Invalid password");
+            }
         } else {
-            throw new RuntimeException("Invalid email/username or password");
+            return new ApiResponse(false, "Invalid email");
         }
     }
 
+<<<<<<< HEAD
 	@Override
 	public User processOAuth2User(OAuth2User oAuth2User) {
 	    String email = oAuth2User.getAttribute("email");
@@ -109,6 +130,9 @@ public class UserServiceImple implements UserService {
 
         return user;
 	}
+=======
+
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
 
 
 }

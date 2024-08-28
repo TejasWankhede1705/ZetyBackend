@@ -29,20 +29,37 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+<<<<<<< HEAD
+=======
+        .csrf().disable()
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
             .authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
                     .requestMatchers("/", "/login**", "/oauth2/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()  // Allow public access
                     .requestMatchers("/auth/login/**").permitAll()  // Specific URL for OAuth2 login
                     .requestMatchers("/user/**").permitAll()  // Permit all URLs under /user/
+<<<<<<< HEAD
                     .anyRequest().authenticated()  // Other paths require authentication
             )
+=======
+                    .anyRequest().authenticated() // Other paths require authentication
+                    .and()
+            )
+            
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
             .oauth2Login(oauth2Login ->
                 oauth2Login
                     .userInfoEndpoint(userInfoEndpoint ->
                         userInfoEndpoint
                             .userService(customOAuth2UserService)
                     )
+<<<<<<< HEAD
                     .defaultSuccessUrl("/swagger-ui.html")  // Redirect to Swagger UI after successful login
+=======
+                    .successHandler((request, response, authentication) -> {
+                        response.sendRedirect("/swagger-ui/index.html");  // Adjust path as needed
+                    })
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
             );
 
         return http.build();

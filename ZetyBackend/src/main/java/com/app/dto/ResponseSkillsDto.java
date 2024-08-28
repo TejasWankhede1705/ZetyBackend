@@ -5,7 +5,8 @@ import java.util.List;
 import com.app.entity.SkillType;
 
 public class ResponseSkillsDto {
-
+	
+	private int id;
 	private List<String> skills;
 	private SkillType skillType;
 	private String languages;
@@ -28,10 +29,19 @@ public class ResponseSkillsDto {
 
 	public String getLanguages() {
 		return languages;
+		
 	}
 
 	public void setLanguages(String languages) {
 		this.languages = languages;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

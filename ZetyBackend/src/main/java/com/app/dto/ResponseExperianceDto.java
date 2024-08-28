@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ResponseExperianceDto {
-
+	
+	private int id;
 	private String Title;
 	private String Company;
 	private String Location;
@@ -60,4 +61,13 @@ public class ResponseExperianceDto {
 		this.responsibility = responsibility;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 }

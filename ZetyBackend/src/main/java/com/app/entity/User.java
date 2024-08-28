@@ -25,10 +25,17 @@ public class User extends BaseEntity {
 	private String password;
 
 	@Column(name = "provider")
+<<<<<<< HEAD
 	private String provider; // e.g., "FACEBOOK"
 
 	@Column(name = "provider_id")
 	private String providerId; // Facebook unique user ID
+=======
+	private String provider; // e.g., "GOOGLE"
+
+	@Column(name = "provider_id")
+	private String providerId; // google unique user ID
+>>>>>>> 412ad7e6bbe683ac256290346a0f4909d3e056c1
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private BasicDetails basicDetails;

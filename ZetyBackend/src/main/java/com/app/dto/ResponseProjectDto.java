@@ -3,6 +3,9 @@ package com.app.dto;
 import java.util.List;
 
 public class ResponseProjectDto {
+	
+	private int id;
+	
 	private String ProjectTitle;
 
 	private String ProjectRole;
@@ -67,6 +70,16 @@ public class ResponseProjectDto {
 
 	public void setDescription(String description) {
 		Description = description;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	
