@@ -4,17 +4,19 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custum_exception.RersourseNotFoundException;
 import com.app.dao.UserDao;
 import com.app.dto.ApiResponse;
-<<<<<<< HEAD
+
 import com.app.dto.PasswordResetDto;
-=======
+
 import com.app.dto.LoginDTO;
->>>>>>> 0cd651a648dea8a5002e17c3e2816e2611ccba2e
+
 import com.app.dto.SignupDto;
 import com.app.dto.UserDto;
 import com.app.entity.User;
@@ -48,7 +50,7 @@ public class UserServiceImple implements UserService {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public ApiResponse resetUserPassword(PasswordResetDto passwordResetDto) {
 		
 		User user = userDao.findByEmail(passwordResetDto.getEmail()).
@@ -66,7 +68,7 @@ public class UserServiceImple implements UserService {
 	
 	
 	
-=======
+
     public String authenticateUser(LoginDTO loginDTO) {
         Optional<User> user = userDao.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
 
@@ -76,6 +78,37 @@ public class UserServiceImple implements UserService {
             throw new RuntimeException("Invalid email/username or password");
         }
     }
->>>>>>> 0cd651a648dea8a5002e17c3e2816e2611ccba2e
+
+	@Override
+	public User processOAuth2User(OAuth2User oAuth2User) {
+	    String email = oAuth2User.getAttribute("email");
+        String providerId = oAuth2User.getAttribute("id");
+
+        if (email == null) {
+            throw new OAuth2AuthenticationException("Email not found from OAuth2 provider");
+        }
+
+        Optional<User> userOptional = userDao.findByEmail(email);
+        User user;
+
+        if (userOptional.isPresent()) {
+            user = userOptional.get();
+            // Update existing user if necessary
+        } else {
+            user = new User();
+            user.setEmail(email);
+            user.setProvider("FACEBOOK");
+            user.setProviderId(providerId);
+            // Password can be null or a random UUID if required
+            user.setPassword(null); // Since password is not needed for OAuth2 login
+
+            user = userDao.save(user);
+
+           
+        }
+
+        return user;
+	}
+
 
 }
