@@ -15,7 +15,7 @@ public class EducationDto {
     private Months month;
     private boolean isGapTaken;
     private String gapYear;
-    private List<String>certification;
+    //private List<String>certification;
 	
 	public EducationDto() {
 		super();
@@ -96,13 +96,13 @@ public class EducationDto {
 		this.gapYear = gapYear;
 	}
 
-	public List<String> getCertification() {
-		return certification;
-	}
-
-	public void setCertification(List<String> certification) {
-		this.certification = certification;
-	}
+//	public List<String> getCertification() {
+//		return certification;
+//	}
+//
+//	public void setCertification(List<String> certification) {
+//		this.certification = certification;
+//	}
 
 	
 	

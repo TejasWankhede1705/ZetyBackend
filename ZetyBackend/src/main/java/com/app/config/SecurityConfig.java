@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -29,11 +31,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors()  // Enable CORS
+            .and()
+            .csrf().disable()  // Disable CSRF for simplicity
             .authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
                     .requestMatchers("/", "/login**", "/oauth2/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()  // Allow public access
                     .requestMatchers("/auth/login/**").permitAll()  // Specific URL for OAuth2 login
-                    .requestMatchers("/user/**").permitAll()  // Permit all URLs under /user/
+                    .requestMatchers("/user/**", "/user/addEducation").permitAll()  // Permit all URLs under /user/
                     .anyRequest().authenticated()  // Other paths require authentication
             )
             .oauth2Login(oauth2Login ->
@@ -42,9 +47,23 @@ public class SecurityConfig {
                         userInfoEndpoint
                             .userService(customOAuth2UserService)
                     )
-                    .defaultSuccessUrl("/swagger-ui.html")  // Redirect to Swagger UI after successful login
+                    .defaultSuccessUrl("/swagger-ui.html", true)  // Redirect to Swagger UI after successful login
             );
 
         return http.build();
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3000", "http://localhost:8080")  // Add your frontend and Swagger origins
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+            }
+        };
     }
 }

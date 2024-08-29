@@ -16,7 +16,7 @@ public class ResponseEducationDto {
     private Months month;
     private boolean isGapTaken;
     private String gapYear;
-    private List<String>certification;
+   // private List<String>certification;
 	public String getSchoolName() {
 		return SchoolName;
 	}
@@ -65,12 +65,12 @@ public class ResponseEducationDto {
 	public void setGapYear(String gapYear) {
 		this.gapYear = gapYear;
 	}
-	public List<String> getCertification() {
-		return certification;
-	}
-	public void setCertification(List<String> certification) {
-		this.certification = certification;
-	}
-    
+//	public List<String> getCertification() {
+//		return certification;
+//	}
+//	public void setCertification(List<String> certification) {
+//		this.certification = certification;
+//	}
+//    
     
 }

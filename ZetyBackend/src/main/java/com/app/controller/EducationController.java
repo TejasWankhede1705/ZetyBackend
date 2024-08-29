@@ -36,6 +36,13 @@ public class EducationController {
 		return ResponseEntity.ok(educationService.getEducation(userId));
 	}
 	
+//	@GetMapping("certifications/{id}")
+//	public ResponseEntity<?>getCertificationDetailsbyEducationId(@PathVariable Long id){
+//		return ResponseEntity.ok(educationService.getCertificationByEducationId(id));
+//	}
+//
+    
+	
 	@PutMapping("updateEducation/{id}")
 	public ResponseEntity<?> updateEducation(@PathVariable Long id, @RequestBody EducationDto dto) {
 	    return ResponseEntity.ok(educationService.updateEducation(id, dto));

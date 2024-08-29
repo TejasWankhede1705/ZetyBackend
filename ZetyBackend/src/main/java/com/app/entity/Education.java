@@ -3,6 +3,7 @@ package com.app.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -12,55 +13,56 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
 @Entity
-@Table(name="education")
-public class Education extends BaseEntity{
-	
-	 
+@Table(name = "education")
+public class Education extends BaseEntity {
+
 	@Column(name = "school_name")
 	private String SchoolName;
 
 	@Column(name = "schooll_ocation")
 	private String SchoolLocation;
-	
+
 	@Column(name = "field_of_study")
 	private String FieldOfStudy;
-	
+
 	@Column(name = "graduation_Year")
 	private String graduationYear;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "degree")
 	private Degree degree;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name="month")
+	@Column(name = "month")
 	private Months month;
-	
-    @Column(name = "is_gap_taken")
+
+	@Column(name = "is_gap_taken")
 	private boolean isGapTaken;
-    
-    @Column(name = "gap_year")
+
+	@Column(name = "gap_year")
 	private String gapYear;
-	
-	@ElementCollection
-	@CollectionTable(name = "certification", joinColumns = @JoinColumn(name = "education_id"))
-	@Column(name = "certification_name")
-	private List<String> certification;
-	
-	
+//	
+//	@ElementCollection
+//	@CollectionTable(name = "certification", joinColumns = @JoinColumn(name = "education_id"))
+//	@Column(name = "certification_name")
+//	private List<String> certification;
+//	
+	@OneToMany(mappedBy = "education", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Certification> certifications;
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="user_id",nullable=false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private BasicDetails detailsEducation;
-	
-	public Education() {}
-	
+
+	public Education() {
+	}
+
 	public Education(String schoolName, String schoolLocation, String fieldOfStudy, String graduationYear,
-			Degree degree, Months month, boolean isGapTaken, String gapYear, List<String> certification,
-			BasicDetails detailsEducation) {
+			Degree degree, Months month, boolean isGapTaken, String gapYear, BasicDetails detailsEducation) {
 		SchoolName = schoolName;
 		SchoolLocation = schoolLocation;
 		FieldOfStudy = fieldOfStudy;
@@ -68,13 +70,8 @@ public class Education extends BaseEntity{
 		this.degree = degree;
 		this.month = month;
 		this.isGapTaken = isGapTaken;
-		this.gapYear = gapYear;
-		this.certification = certification;
 		this.detailsEducation = detailsEducation;
 	}
-
-
-
 
 	public String getSchoolName() {
 		return SchoolName;
@@ -132,7 +129,7 @@ public class Education extends BaseEntity{
 	public void setMonth(Months month) {
 		this.month = month;
 	}
-	
+
 	public boolean isGapTaken() {
 		return isGapTaken;
 	}
@@ -149,20 +146,29 @@ public class Education extends BaseEntity{
 		this.gapYear = gapYear;
 	}
 
-	public List<String> getCertification() {
-		return certification;
+	// Add methods to add/remove certifications
+	public void addCertification(Certification certification) {
+		this.certifications.add(certification);
 	}
 
-	public void setCertification(List<String> certification) {
-		this.certification = certification;
+	public void removeCertification(Certification certification) {
+		this.certifications.remove(certification);
+	}
+
+	public List<Certification> getCertifications() {
+		return certifications;
+	}
+
+	public void setCertifications(List<Certification> certifications) {
+		this.certifications = certifications;
 	}
 
 	@Override
 	public String toString() {
-		return "Education [ SchoolName=" + SchoolName + ", SchoolLocation=" + SchoolLocation
-				+ ", FieldOfStudy=" + FieldOfStudy + ", graduationYear=" + graduationYear + ", degree=" + degree
-				+ ", month=" + month + ", isGapTaken=" + isGapTaken + ", gapYear=" + gapYear + ", certification="
-				+ certification + ", detailsEducation=" + detailsEducation + "]";
+		return "Education [ SchoolName=" + SchoolName + ", SchoolLocation=" + SchoolLocation + ", FieldOfStudy="
+				+ FieldOfStudy + ", graduationYear=" + graduationYear + ", degree=" + degree + ", month=" + month
+				+ ", isGapTaken=" + isGapTaken + ", gapYear=" + gapYear + ", detailsEducation=" + detailsEducation
+				+ "]";
 	}
 
 }

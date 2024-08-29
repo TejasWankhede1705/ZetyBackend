@@ -10,5 +10,6 @@ public interface EducationSerivce {
 	List<EducationDto> getEducation(Long userId);
 	ApiResponse updateEducation(Long id,EducationDto dto);
 	ApiResponse deleteEducation(Long id);
+	//List<String>getCertificationByEducationId(Long id);
 
 }
